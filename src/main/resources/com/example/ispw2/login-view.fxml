@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.ispw2.view.gui.controller.LoginViewGUI">
+
+   <children>
+      <!-- Pannello laterale sinistro -->
+      <Pane layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="230.0" style="-fx-background-color: #3F3F37;">
+         <children>
+            <!-- Logo o icona -->
+            <ImageView fitHeight="54.0" fitWidth="72.0" layoutX="79.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/icona_login.png" />
+               </image>
+            </ImageView>
+
+            <!-- Titolo applicazione -->
+            <Text fill="#d6d6b1" layoutX="60.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyEvent">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+
+      <!-- Pannello contenuto principale -->
+      <Pane layoutX="230.0" layoutY="0.0" prefHeight="400.0" prefWidth="370.0" style="-fx-background-color: #D6D6B1;">
+         <children>
+            <!-- Titolo login -->
+            <Text fill="#3F3F37" layoutX="140.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+
+            <!-- Form di login -->
+            <VBox alignment="CENTER" layoutX="60.0" layoutY="80.0" prefHeight="280" prefWidth="250" spacing="15">
+               <TextField fx:id="emailField" prefWidth="250" promptText="Username o Email"
+                          style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3F3F37;" />
+
+               <PasswordField fx:id="passwordField" prefWidth="250" promptText="Password"
+                              style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3F3F37;" />
+
+               <!-- Messaggi di errore -->
+               <Label fx:id="wrongCredentials" textFill="#c10606" visible="false" />
+               <Label fx:id="credentialsError" textFill="#cf0000" visible="false" />
+
+               <!-- Pulsante Login -->
+               <Button fx:id="loginButton" onAction="#handleLogin" prefWidth="250" text="Accedi"
+                       style="-fx-background-color: #3F3F37; -fx-text-fill: #d6d6b1; -fx-background-radius: 5;" />
+
+               <!-- Link registrazione -->
+               <Hyperlink fx:id="registerLink" onAction="#handleRegisterRedirect" text="Non hai un account? Registrati"
+                          style="-fx-text-fill: #3F3F37;" />
+
+               <!-- Pulsante Autopopola -->
+               <Button fx:id="autopopolaCampi" onAction="#handleAutopopolaCampi" prefWidth="250"
+                       text="Autopopola campi"
+                       style="-fx-background-color: #D6D6B1; -fx-border-color: #3F3F37; -fx-border-radius: 5;" />
+
+               <!-- Label per errori generali -->
+               <Label fx:id="errorLabel" alignment="CENTER" textFill="red" wrapText="true" />
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

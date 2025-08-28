@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.ispw2.view.gui.controller.RegisterViewGUI">
+
+    <children>
+        <!-- Pannello laterale scuro come nella homecliente -->
+        <Pane layoutX="0.0" layoutY="0.0" prefHeight="450.0" prefWidth="220.0" style="-fx-background-color: #3F3F37;">
+            <children>
+                <!-- Logo -->
+                <ImageView fitHeight="54.0" fitWidth="72.0" layoutX="75.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/icona_login.png" />
+                    </image>
+                </ImageView>
+
+                <!-- Titolo "MyEvent" -->
+                <Text fill="#d6d6b1" layoutX="65.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyEvent">
+                    <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                    </font>
+                </Text>
+            </children>
+        </Pane>
+
+        <!-- Pannello principale con sfondo sabbia -->
+        <Pane layoutX="220.0" layoutY="0.0" prefHeight="450.0" prefWidth="380.0" style="-fx-background-color: #D6D6B1;">
+            <children>
+                <!-- Titolo Registrazione -->
+                <Text layoutX="130.0" layoutY="40.0" fill="#3F3F37" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrazione">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Text>
+
+                <!-- Box con i campi di input -->
+                <VBox alignment="CENTER" layoutX="50" layoutY="70" prefHeight="350" prefWidth="280" spacing="15">
+                    <TextField fx:id="nomeField" prefWidth="250" promptText="Nome"
+                               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3F3F37;" />
+
+                    <TextField fx:id="cognomeField" prefWidth="250" promptText="Cognome"
+                               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3F3F37;" />
+
+                    <TextField fx:id="emailField" prefWidth="250" promptText="Email"
+                               style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3F3F37;" />
+
+                    <PasswordField fx:id="passwordField" prefWidth="250" promptText="Password"
+                                   style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3F3F37;" />
+
+                    <PasswordField fx:id="confirmPasswordField" prefWidth="250" promptText="Conferma Password"
+                                   style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3F3F37;" />
+
+                    <!-- Bottone Registrati -->
+                    <Button fx:id="registerButton" onAction="#handleRegister" prefWidth="250" text="Registrati"
+                            style="-fx-background-color: #3F3F37; -fx-text-fill: #d6d6b1; -fx-background-radius: 5;" />
+
+                    <!-- Label errore -->
+                    <Label fx:id="errorLabel" alignment="CENTER" textFill="red" wrapText="true" />
+
+                    <!-- Bottone Autopopola -->
+                    <Button fx:id="autopopolaCampi" onAction="#handleAutopopolaCampiReg" prefHeight="20.0" prefWidth="204.0" text="Autopopola campi"
+                            style="-fx-background-color: #D6D6B1; -fx-text-fill: #3F3F37; -fx-border-color: #3F3F37; -fx-border-radius: 5;" />
+                </VBox>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

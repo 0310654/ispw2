@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.ispw2.view.gui.controller.RegisterViewGUI"
+            prefWidth="400.0" prefHeight="300.0"
+            styleClass="root">
+
+    <children>
+        <VBox spacing="20" alignment="CENTER" layoutX="50" layoutY="50" prefWidth="300" prefHeight="200">
+            <Label text="Registrazione completata!" styleClass="title-label" />
+            <Label text="Il tuo account è stato creato con successo." wrapText="true" alignment="CENTER" />
+
+            <Button fx:id="backToLoginButton" text="Torna al Login" onAction="#handleBackToLogin" prefWidth="200" />
+        </VBox>
+    </children>
+</AnchorPane>
+

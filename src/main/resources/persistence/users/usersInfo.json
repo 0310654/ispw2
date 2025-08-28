@@ -1,0 +1,14 @@
+{
+  "utenti": [
+    {
+      "email": "organizzatore@email.com",
+      "password": "password",
+      "type": "organizzatore"
+    },
+    {
+      "email": "cliente@email.com",
+      "password": "password",
+      "type": "utente registrato"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ispw2.view.gui.controller.PrenConfGUI">
+   <children>
+      <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="405.0" prefWidth="610.0" style="-fx-background-color: #D6D6B1;">
+         <children>
+            <Text fill="#3f3f37" layoutX="528.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyEvent">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="54.0" fitWidth="72.0" layoutX="527.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/icona_login.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="178.0" layoutY="29.0" prefHeight="41.0" prefWidth="254.0" style="-fx-background-color: #3F3F37; -fx-background-radius: 6;">
+               <children>
+                  <Text fill="#d6d6b1" layoutX="22.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenotazione confermata!" wrappingWidth="210.876953125">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Button fx:id="backButton" layoutX="28.0" layoutY="22.0" mnemonicParsing="false" onAction="#back" prefHeight="41.0" prefWidth="44.0" style="-fx-background-radius: 15;" textFill="#3f3f37" />
+            <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="34.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/backbutton.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="46.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Devi ancora completare l'acquisto, altrimenti perderai il tuo posto!" wrappingWidth="538.521484375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tableInfo" layoutX="52.0" layoutY="158.0" prefHeight="89.0" prefWidth="527.0">
+              <columns>
+                <TableColumn fx:id="col_nome_evento" prefWidth="75.0" text="Evento" />
+                <TableColumn fx:id="col_cod_ticket" prefWidth="75.0" text="Cod" />
+                  <TableColumn fx:id="col_nome_cliente" prefWidth="79.0" text="Nome" />
+                  <TableColumn fx:id="col_cognome" prefWidth="71.0" text="Cognome" />
+                  <TableColumn fx:id="col_data_evento" prefWidth="75.0" text="data evento" />
+                  <TableColumn fx:id="col_data_pren" prefWidth="75.0" text="data prenot." />
+                  <TableColumn fx:id="col_stato_pren" prefWidth="75.0" text="Stato" />
+              </columns>
+            </TableView>
+            <Button layoutX="199.0" layoutY="330.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="233.0" style="-fx-background-color: #3F3F37; -fx-background-radius: 10;" text="Completa l'acquisto!" textFill="#d6d6b1">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Text layoutX="34.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ecco qui le tue informazioni..." wrappingWidth="233.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
