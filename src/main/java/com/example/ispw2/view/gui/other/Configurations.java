@@ -6,7 +6,7 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 public class Configurations {
-    private static final String FILE_PATH = "src/main/resources/configurations/configurations.properties";
+    private static final String FILE_PATH = "src/main/resources/configurations.properties";
     public static final String LOGGER_NAME = "MyEvent";
 
     private final Properties props = new Properties();

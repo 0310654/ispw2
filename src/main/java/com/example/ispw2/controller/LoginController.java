@@ -31,11 +31,13 @@ public class LoginController {
 
     private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
-    public User start(LoginBean loginBean) throws CredenzialiErrateException, UserNonTrovatoException, DAOException, UserNonSupportatoException {
+    public User start(LoginBean loginBean) throws CredenzialiErrateException, UserNonTrovatoException, DAOException {
 
         UserDAO dao = DAOFactory.getDAOFactory().createUserDAO();
         LoginBean loggedInBean;
         loggedInBean = dao.getUserInfoByEmail(loginBean.getEmail());
+
+        System.out.println(loggedInBean.getEmail()+ " " + loggedInBean.getPassword());
 
         if (!loginBean.getPassword().equals(loggedInBean.getPassword())){
             log.severe("Errore nel Login: credenziali errate.");
@@ -54,12 +56,10 @@ public class LoginController {
                     throw new RuntimeException(e);
                 }
                 return user;
-            } else{
-                log.severe("Error in LoginController: Unsupported user type.");
-                throw new UserNonSupportatoException();
             }
         }
 
+        return null;
     }
 
     public User getUser() {

@@ -67,6 +67,7 @@ public class DemoUserDAO implements UserDAO {
         );
     }
 
+    //TODO vedere se in override
     public static FiltriBean getFiltri() {
         FiltriBean filtri = new FiltriBean();
 
@@ -84,7 +85,7 @@ public class DemoUserDAO implements UserDAO {
         return filtri;
     }
 
-    //@Override
+    @Override
     public void nuovoCliente(Cliente cliente) throws EmailGiaInUsoException, DAOException {
         for (User user : users){
             if(user.getEmail().equals(cliente.getEmail())){
@@ -99,7 +100,7 @@ public class DemoUserDAO implements UserDAO {
         }
     }
 
-    //@Override
+    @Override
     public LoginBean getUserInfoByEmail(String email) throws UserNonTrovatoException {
         for (User user : users) {
             if (user.getEmail().equals(email)) {
@@ -111,7 +112,7 @@ public class DemoUserDAO implements UserDAO {
 
 
 
-    //@Override
+    @Override
     public Cliente loadCliente(String email) throws UserNonTrovatoException {
         for(User user: users){
             if(user.getEmail().equals(email)){
@@ -122,7 +123,7 @@ public class DemoUserDAO implements UserDAO {
         throw new UserNonTrovatoException();
     }
 
-    //@Override
+    @Override
     public Organizzatore loadOrganizzatore(String email) throws UserNonTrovatoException {
         for (User user : users) {
             if (user.getEmail().equals(email)) {
@@ -137,6 +138,7 @@ public class DemoUserDAO implements UserDAO {
         return users;
     }
 
+    //TODO rivedere cosa fa
     @Override
     public Prenotazione loadPrenotazione(String email){
         Prenotazione prenotazione = new Prenotazione(

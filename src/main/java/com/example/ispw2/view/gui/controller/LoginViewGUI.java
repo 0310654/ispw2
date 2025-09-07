@@ -95,10 +95,6 @@ public class LoginViewGUI {
             wrongCredentials.setVisible(true);
             credentialsError.setVisible(false);
 
-        } catch (UserNonSupportatoException e) {
-            wrongCredentials.setText("Utente non supportato!");
-            wrongCredentials.setVisible(true);
-            credentialsError.setVisible(false);
         }
 
     }

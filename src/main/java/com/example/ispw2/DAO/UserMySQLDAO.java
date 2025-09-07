@@ -14,10 +14,9 @@ import com.example.ispw2.view.gui.other.Configurations;
 import com.example.ispw2.view.gui.other.Connector;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,10 +58,6 @@ public class UserMySQLDAO implements UserDAO {
                 throw new DAOException("Error in UserMySQLDAO");
             }
 
-            if(LoginQuery.nuovoCliente(conn, cliente) == 0) {
-                throw new DAOException("Error in UserMySQLDAO");
-            }
-
             conn.commit();
 
         }catch (SQLException e) {
@@ -76,20 +71,35 @@ public class UserMySQLDAO implements UserDAO {
 
     @Override
     public Prenotazione loadPrenotazione(String email) throws UserNonTrovatoException, DAOException{
+        //trova la prenotazione pendente
+
         Prenotazione prenotazione;
         try (ResultSet rs = LoginQuery.getPrenotazionePendente(Connector.getConnection(), email)) {
 
             if (!rs.next()) {
-                throw new UserNonTrovatoException();
+                //throw new UserNonTrovatoException();
+                return null;
             }
             else {
+                Timestamp tsEvento = rs.getTimestamp("data_evento");
+                Timestamp tsPrenotazione = rs.getTimestamp("data_prenotazione");
+
+                System.out.println("prenotazione:" +
+                        rs.getString("nome_evento")+ "|"+
+                        rs.getString("cod_prenotazione")+ "|"+
+                        rs.getString("nome") + "|" +
+                        rs.getString("cognome")+ "|" +
+                        tsEvento.toLocalDateTime()+ "|" +
+                        tsPrenotazione.toLocalDateTime()+ "|" +
+                        rs.getString("stato_prenotazione"));
+
                  prenotazione = new Prenotazione(
                         rs.getString("nome_evento"),
                         rs.getString("cod_prenotazione"),
                          rs.getString("nome"),
                          rs.getString("cognome"),
-                         rs.getTimestamp("data_evento").toLocalDateTime(),
-                         rs.getTimestamp("data_prenotazione").toLocalDateTime(),
+                         tsEvento != null ? tsEvento.toLocalDateTime() : null,
+                         tsPrenotazione != null ? tsPrenotazione.toLocalDateTime() : null,
                          rs.getString("stato_prenotazione"));
             }
         } catch (SQLException e) {
@@ -130,7 +140,7 @@ public class UserMySQLDAO implements UserDAO {
     @Override
     public Organizzatore loadOrganizzatore(String email) throws UserNonTrovatoException, DAOException {
         Organizzatore organizzatore;
-        ArrayList<Evento> iMieiEventi = loadEvento(email);
+        ArrayList<Evento> iMieiEventi = loadIMieiEventi(email);
 
         try (ResultSet rs = LoginQuery.loadCliente(Connector.getConnection(), email)) {
 
@@ -155,7 +165,9 @@ public class UserMySQLDAO implements UserDAO {
     }
 
 
-    public ArrayList<Evento> loadEvento(String email) {
+    public ArrayList<Evento> loadIMieiEventi(String email) {
+
+        //prende gli eventi organizzati dall'organizzatore in questione (in base all'email dell'organizzatore)
 
         ArrayList<Evento> iMieiEventi = new ArrayList<>();
 

@@ -21,8 +21,9 @@ public class DemoEventiDAO implements EventiDAO {
         return instance;
     }
 
+
     //TODO aggiungere descrizione evento
-    private DemoEventiDAO() {
+    public DemoEventiDAO() {
         ArrayList<String> settori1 = new ArrayList<>(List.of("VIP", "Standard", "Economy"));
         ArrayList<Double> prezzi1 = new ArrayList<>(List.of(80.0, 50.0, 30.0));
         ArrayList<Integer> disponibilita1 = new ArrayList<>(List.of(50, 150, 300));
@@ -69,11 +70,12 @@ public class DemoEventiDAO implements EventiDAO {
                 new ArrayList<>(List.of(100, 300)),""));
     }
 
+    @Override
     public ArrayList<Evento> getEventi() {
         return eventi;
     }
 
-
+    @Override
     public void addEvento(Evento evento) {
         eventi.add(evento);
     }

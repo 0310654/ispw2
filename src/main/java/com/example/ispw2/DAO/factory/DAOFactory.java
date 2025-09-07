@@ -1,5 +1,8 @@
 package com.example.ispw2.DAO.factory;
 
+import com.example.ispw2.DAO.EventiDAO;
+import com.example.ispw2.DAO.PrenotazioniDAO;
+import com.example.ispw2.DAO.SettoreMySQLDAO;
 import com.example.ispw2.DAO.UserDAO;
 import com.example.ispw2.altro.Printer;
 
@@ -42,4 +45,14 @@ public abstract class DAOFactory {
     }
 
     public abstract UserDAO createUserDAO();
+
+    public abstract EventiDAO getEventiDAO();
+
+    public abstract EventiDAO addEventiDAO();
+
+    public abstract PrenotazioniDAO addPrenotazioniDAO();
+
+    public abstract PrenotazioniDAO getPrenotazioniDAO();
+
+    //public abstract SettoreMySQLDAO getNumMaxSettoriDAO();
 }

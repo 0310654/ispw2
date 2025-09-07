@@ -2,6 +2,10 @@ package com.example.ispw2.controller;
 
 import com.example.ispw2.DAO.DemoEventiDAO;
 import com.example.ispw2.DAO.DemoPrenotazioneDAO;
+import com.example.ispw2.DAO.EventiDAO;
+import com.example.ispw2.DAO.SettoreMySQLDAO;
+import com.example.ispw2.DAO.factory.DAOFactory;
+import com.example.ispw2.DAO.factory.MySQLDAOFactory;
 import com.example.ispw2.bean.EventBean;
 import com.example.ispw2.bean.PrenotazioniBean;
 import com.example.ispw2.exceptions.MaxPendingBorrowsException;
@@ -10,6 +14,7 @@ import com.example.ispw2.model.Evento;
 import com.example.ispw2.model.Organizzatore;
 import com.example.ispw2.model.Prenotazione;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -28,7 +33,9 @@ public class AddEventoController {
 
 
     public String newCodiceEvento() {
-        ArrayList<Evento> eventi = DemoEventiDAO.getInstance().getEventi();
+
+        EventiDAO eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
+        ArrayList<Evento> eventi = eventiDAO.getEventi();
         ArrayList<Integer> codici = new ArrayList<>();
         for (Evento evento : eventi) {
             try {
@@ -61,8 +68,33 @@ public class AddEventoController {
                 eventBean.getData_evento(),
                 eventBean.getNum_posti_settore(),
                 eventBean.getDescrizione());
-        DemoEventiDAO.getInstance().addEvento(evento);
+
+        EventiDAO eventiDAO = DAOFactory.getDAOFactory().addEventiDAO();
+        try {
+            eventiDAO.addEvento(evento);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         ((Organizzatore)LoginController.getInstance().getUser()).addiMieiEventi(evento);
     }
+
+    //TODO vedere se serve qui
+    /*public String newCodiceSettore() {
+
+        SettoreMySQLDAO settoreMySQLDAO = DAOFactory.getDAOFactory().getNumMaxSettoriDAO();
+        String cod_max = settoreMySQLDAO.getNumMaxSettoriDAO();
+
+        String prefisso = cod_max.substring(0, 1);
+        String parteNumerica = cod_max.substring(1);
+        int numero = Integer.parseInt(parteNumerica);
+        if(numero == 0){
+            return "S001";
+        }
+        numero++;
+        String nuovoCodice = String.format("%s%03d", prefisso, numero);
+
+        return nuovoCodice;
+    }*/
 
 }

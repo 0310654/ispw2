@@ -21,7 +21,7 @@ public class DemoPrenotazioneDAO implements PrenotazioniDAO {
 
 
 
-    private DemoPrenotazioneDAO() {
+    public DemoPrenotazioneDAO() {
         prenotazioni.add(new Prenotazione("Concerto Coldplay","1001", "Luca", "Bianchi", LocalDateTime.of(2025, 9, 10, 21, 0),LocalDateTime.of(2025, 8, 25, 14, 15)
                 ,"CONFERMATA"));
         prenotazioni.add(new Prenotazione("Mostra Van Gogh", "1002", "Maria", "Rossi", LocalDateTime.of(2025, 9, 12, 10, 30),LocalDateTime.of(2025, 8, 25, 14, 15)
@@ -34,10 +34,12 @@ public class DemoPrenotazioneDAO implements PrenotazioniDAO {
                 ,"PENDENTE"));
     }
 
+    @Override
     public ArrayList<Prenotazione> getPrenotazioni() {
         return prenotazioni;
     }
 
+    @Override
     public void addPrenotazione(Prenotazione prenotazione) {
         prenotazioni.add(prenotazione);
     }

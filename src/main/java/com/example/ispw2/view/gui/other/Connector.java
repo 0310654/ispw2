@@ -17,6 +17,7 @@ public class Connector {
         try {
             if (conn == null) {
                 conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
+                System.out.println(conn.getMetaData().getURL());
             }
         }catch(SQLException e){
             e.printStackTrace();

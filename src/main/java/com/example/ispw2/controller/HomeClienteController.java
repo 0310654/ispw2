@@ -2,6 +2,8 @@ package com.example.ispw2.controller;
 
 import com.example.ispw2.DAO.DemoUserDAO;
 import com.example.ispw2.DAO.DemoEventiDAO;
+import com.example.ispw2.DAO.EventiDAO;
+import com.example.ispw2.DAO.factory.DAOFactory;
 import com.example.ispw2.bean.FiltriBean;
 import com.example.ispw2.bean.SelectedBean;
 import com.example.ispw2.model.Evento;
@@ -22,6 +24,7 @@ public class HomeClienteController {
         return instance;
     }
 
+    //TODO rivedere (ce l'ho solo per la demo)
     public FiltriBean getFiltri() {
         FiltriBean filtri = DemoUserDAO.getFiltri();
         return filtri;
@@ -32,13 +35,18 @@ public class HomeClienteController {
         return eventi_filtrati;
     }
 
-    //ora devo filtrarla secondo i selectedBean
     /**
-     * @return Lista di eventi filtrati
+     * @return Lista di eventi filtrati in base ai filtri selezionati (secondo SelectedBean)
      */
     public ArrayList<Evento> filtriSelezionati(SelectedBean selectedBean) {
+
         //prendo la lista di tutti gli eventi dal DAO
-        ArrayList<Evento> eventi = DemoEventiDAO.getInstance().getEventi();
+        EventiDAO eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
+        ArrayList<Evento> eventi = eventiDAO.getEventi();
+        /*System.out.println("tutti gli eventi:");
+        for(Evento evento : eventi) {
+            System.out.println(evento);
+        }*/
         //creo una lista vuota da riempire
         eventi_filtrati = new ArrayList<>();
 

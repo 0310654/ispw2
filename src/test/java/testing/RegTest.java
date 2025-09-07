@@ -19,7 +19,7 @@ public class RegTest {
                 "cognome",
                 "test2@email.com",
                 "password2");
-        RegisterController registerController = new RegisterController();
+        RegisterController registerController = RegisterController.getInstance();
         try {
             assertTrue(registerController.registraCliente(registerBean));
         } catch (EmailGiaInUsoException e) {

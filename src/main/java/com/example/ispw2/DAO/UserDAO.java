@@ -18,7 +18,7 @@ public interface UserDAO {
      * Valore di ritorno booleano per verificare la correttezza dell'operazione */
     void nuovoCliente(Cliente cliente) throws EmailGiaInUsoException, DAOException;
 
-
+    //TODO non so se levare o meno da qui
     Prenotazione loadPrenotazione(String email) throws UserNonTrovatoException, DAOException;
 
     /** Recupera le informazioni di un utente in persistenza, ottenuta dall'email */

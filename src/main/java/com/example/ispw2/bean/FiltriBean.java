@@ -1,6 +1,6 @@
 package com.example.ispw2.bean;
 
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class FiltriBean {
@@ -32,7 +32,7 @@ public class FiltriBean {
 
     public FiltriBean() {
         eventi = new ArrayList<>();
-        localita = new ArrayList<>();
+        this.localita = new ArrayList<>();
         prezzo = new ArrayList<>();
     }
 

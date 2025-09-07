@@ -1,14 +1,10 @@
 package com.example.ispw2.controller;
 
-import com.example.ispw2.DAO.DemoPrenotazioneDAO;
-import com.example.ispw2.DAO.DemoUserDAO;
-import com.example.ispw2.altro.Printer;
-import com.example.ispw2.bean.FiltriBean;
+import com.example.ispw2.DAO.PrenotazioniDAO;
+import com.example.ispw2.DAO.factory.DAOFactory;
 import com.example.ispw2.bean.PrenotazioniBean;
-import com.example.ispw2.exceptions.DAOException;
 import com.example.ispw2.exceptions.MaxPendingBorrowsException;
 import com.example.ispw2.model.Cliente;
-import com.example.ispw2.model.Evento;
 import com.example.ispw2.model.Prenotazione;
 import com.example.ispw2.model.User;
 
@@ -30,9 +26,16 @@ public class PrenotazioniController {
         return instance;
     }
 
+    public ArrayList<Prenotazione> getPrenotazioni() {
+        PrenotazioniDAO prenotazioniDAO = DAOFactory.getDAOFactory().getPrenotazioniDAO();
+        ArrayList<Prenotazione> prenotazioni =  prenotazioniDAO.getPrenotazioni();
+        return prenotazioni;
+    }
 
     public String newCodice() {
-        ArrayList<Prenotazione> prenotazioni = DemoPrenotazioneDAO.getInstance().getPrenotazioni();
+
+        ArrayList<Prenotazione> prenotazioni =  getPrenotazioni();
+
         ArrayList<Integer> codici = new ArrayList<>();
         for (Prenotazione p : prenotazioni) {
             try {
@@ -66,7 +69,9 @@ public class PrenotazioniController {
                     LocalDateTime.now(),
                     prenotazioneBean.getStato_prenotazione());
 
-            DemoPrenotazioneDAO.getInstance().addPrenotazione(prenotazione);
+            PrenotazioniDAO prenotazioniDAO = DAOFactory.getDAOFactory().addPrenotazioniDAO();
+            prenotazioniDAO.addPrenotazione(prenotazione);
+
             //ho aggiunto la prenotazione tra le prenotazioni pendenti del cliente
             ((Cliente) LoginController.getInstance().getUser()).setPrenotazionePendente(prenotazione);
 
@@ -75,7 +80,7 @@ public class PrenotazioniController {
         }
     }
 
-    public Prenotazione getPrenotazioni(){
+    public Prenotazione getPrenotazione(){
         return this.prenotazione;
     }
 }

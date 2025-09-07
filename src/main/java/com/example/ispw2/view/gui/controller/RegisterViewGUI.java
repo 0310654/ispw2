@@ -94,7 +94,7 @@ public class RegisterViewGUI {
             RegisterBean registerBean = new RegisterBean(name, surname, email, password);;
 
             //istanzio un controller applicativo e gli passo il bean contenente i dati per registrare l'utente
-            RegisterController registerController = new RegisterController();
+            RegisterController registerController = RegisterController.getInstance();
             registerController.registraCliente(registerBean);
 
             loadConfirmation();

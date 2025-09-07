@@ -39,7 +39,7 @@ public class AddEventoTest {
         LoginController loginController = LoginController.getInstance();
         try {
             loginController.start(loginBean);
-        } catch (CredenzialiErrateException | DAOException | UserNonSupportatoException e) {
+        } catch (CredenzialiErrateException | DAOException e) {
             throw new RuntimeException(e);
         }
 
@@ -77,7 +77,6 @@ public class AddEventoTest {
         );
 
         System.out.println("voglio inserire: " + eventBean.toString());
-
 
         List<Evento> eventiTot = DemoEventiDAO.getInstance().getEventi();
         System.out.println("eventi: OLD");

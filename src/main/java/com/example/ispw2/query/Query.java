@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Query {
 
+
     private Query(){}
 
     /*--------------------Register Queries-------------------*/
@@ -40,7 +41,7 @@ public class Query {
                 LEFT JOIN 
                     ispw.Prenotazione p ON u.email = p.email AND p.stato_prenotazione = 'PENDING' 
                 WHERE 
-                    u.email = email_input;
+                    u.email = ?;
         """;
 
     //query per il load delle info dell'organizzatore
@@ -64,13 +65,11 @@ public class Query {
                 LEFT JOIN 
                     ispw.Evento e ON u.email = e.email_organizzatore'
                 WHERE 
-                    u.email = email_input;
+                    u.email = ?;
         """;
 
-
-
     public static final String GET_PRENOTAZIONE = """
-            SELECT 
+            SELECT
                 e.nome_evento,
                 p.cod_prenotazione,
                 u.nome,
@@ -78,16 +77,14 @@ public class Query {
                 e.data_evento,
                 p.data_prenotazione,
                 p.stato_prenotazione
-            FROM 
-                ispw.User u 
-            LEFT JOIN 
-                ispw.Prenotazione p ON u.email = p.email AND p.stato_prenotazione = 'PENDING' 
-            LEFT JOIN
-                ispw.Evento e ON p.cod_evento = e.cod_evento 
+            FROM
+                ispw.User u
+            INNER JOIN
+                ispw.Prenotazione p ON u.email = p.email AND p.stato_prenotazione = 'PENDING'
+            INNER JOIN
+                ispw.Evento e ON p.cod_evento = e.cod_evento
             WHERE u.email = ?
 """;
-
-
 
     public static final String GET_EVENTO = """
            SELECT 
@@ -125,6 +122,35 @@ public class Query {
 
     /*--------------------Ricerca Queries Cliente-------------------*/
 
+    public static final String SHOW_CATALOG = "SELECT * FROM ispw.Evento";
+
+    public static final String SHOW_PRENOTAZIONI = "SELECT * FROM ispw.Prenotazione";
 
 
+
+    /*--------------------Ricerca Queries Organizzatore-------------------*/
+
+    public static final String ADD_EVENT = "INSERT INTO ispw.Evento VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public static final String ADD_SETTORE = "INSERT INTO ispw.Settori VALUES (?, ?, ?, ?, ?, ?)"; ;
+
+
+
+    /*--------------------Ricerca Queries Prenotazioni-------------------*/
+
+    public static final String GET_NAME = "SELECT u.nome FROM ispw.User u WHERE u.email = ?";
+    public static final String GET_SURNAME = "SELECT u.cognome FROM ispw.User u WHERE u.email = ?";
+
+    public static final String GET_NOME_EVENTO = "SELECT e.nome_evento FROM ispw.Evento e WHERE e.cod_evento = ?";
+    public static final String  GET_DATA_EVENTO = "SELECT e.data_evento FROM ispw.Evento e WHERE e.cod_evento = ?";
+
+    public static final String ADD_PRENOTAZIONE = "INSERT INTO ispw.Prenotazione VALUES (?, ?, ?, ?, ?)";
+    public static final String GET_COD_EVENTO = "SELECT e.cod_evento FROM ispw.Evento e WHERE e.nome_evento = ?";
+    public static final String GET_EMAIL_USER = "SELECT u.email FROM ispw.User u WHERE u.nome = ? AND u.cognome = ?";
+
+    public static final String GET_MAX_CODE_SETTORE = """
+            SELECT codice_settore AS max_cod
+                FROM ispw.Settori
+                ORDER BY CAST(SUBSTRING(codice_settore, 2) AS UNSIGNED) DESC
+                LIMIT 1
+            """;
 }

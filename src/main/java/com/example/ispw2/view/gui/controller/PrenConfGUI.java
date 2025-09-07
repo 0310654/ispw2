@@ -2,7 +2,6 @@ package com.example.ispw2.view.gui.controller;
 
 import com.example.ispw2.controller.PrenotazioniController;
 import com.example.ispw2.model.Cliente;
-import com.example.ispw2.model.Evento;
 import com.example.ispw2.model.Prenotazione;
 import com.example.ispw2.model.User;
 import com.example.ispw2.view.gui.other.Configurations;
@@ -14,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,7 +39,7 @@ public class PrenConfGUI {
 
     @FXML
     public void initialize() {
-        Prenotazione prenotazione = PrenotazioniController.getInstance().getPrenotazioni();
+        Prenotazione prenotazione = PrenotazioniController.getInstance().getPrenotazione();
         // Popola la TableView con i dati del DAO
         tableInfo.getItems().setAll(prenotazione);
     }
