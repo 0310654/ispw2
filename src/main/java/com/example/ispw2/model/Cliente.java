@@ -9,11 +9,7 @@ public class Cliente extends User {
 
     private LocalDate data_registrazione;
     private Prenotazione prenotazioni_pendenti;
-
-    /*private List<Prenotazione> prenotazioni_confermate = new ArrayList<>();
-    private List<Prenotazione> prenotazioni_annullate = new ArrayList<>();
-    private List<Prenotazione> prenotazioni_scadute = new ArrayList<>();*/
-
+    private String pending;
 
     public Cliente(String email, String password, String name, String surname, LocalDate data_registrazione, Prenotazione prenotazioni_pendenti) {
         super(email, name, surname, password, "utente registrato");
@@ -39,39 +35,6 @@ public class Cliente extends User {
     public void setPrenotazionePendente(Prenotazione prenotazione) {this.prenotazioni_pendenti = prenotazione;}
 
 
-    /*public List<Prenotazione getPrenotazioni_confermate() {
-        return prenotazioni_confermate;
-    }
-
-    public void setPrenotazioni_confermate(Prenotazione prenotazione_confermata) {
-        this.prenotazioni_confermate.add(prenotazione_confermata);
-    }
-
-    public List<Prenotazione> getPrenotazioni_annullate() {
-        return prenotazioni_annullate;
-    }
-
-    public void setPrenotazioni_annullate(Prenotazione prenotazione_annullata) {
-        this.prenotazioni_annullate.add(prenotazione_annullata);
-    }
-
-    public List<Prenotazione> getPrenotazioni_scadute() {
-        return prenotazioni_scadute;
-    }
-
-    public void setPrenotazioni_scadute(Prenotazione prenotazione_scaduta) {
-        this.prenotazioni_scadute.add(prenotazione_scaduta);
-    }*/
-
-
-
-    /*creazione user in memory mode
-    public Costumer(String email, String password, String name, String surname, SupportedUserTypes type, List<Borrow> pendingBorrows) {
-        super(email, name, surname, password, type);
-        this.membershipDate = LocalDate.now();
-        this.membershipStatus = true;
-        this.pendingBorrows = pendingBorrows;
-    }*/
 
     @Override
     public String toString() {

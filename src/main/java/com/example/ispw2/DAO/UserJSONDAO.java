@@ -1,28 +1,29 @@
 package com.example.ispw2.DAO;
 
 import com.example.ispw2.bean.LoginBean;
+import com.example.ispw2.bean.RegisterBean;
 import com.example.ispw2.exceptions.DAOException;
 import com.example.ispw2.exceptions.EmailGiaInUsoException;
 import com.example.ispw2.exceptions.UserNonTrovatoException;
-import com.example.ispw2.model.Cliente;
-import com.example.ispw2.model.Evento;
-import com.example.ispw2.model.Organizzatore;
-import com.example.ispw2.model.Prenotazione;
+import com.example.ispw2.model.*;
+import com.example.ispw2.view.gui.other.Adapter.ClienteAdapter;
+import com.example.ispw2.view.gui.other.Adapter.PrenotazioneAdapter;
 import com.example.ispw2.view.gui.other.ConfigurationJSN;
 import com.example.ispw2.view.gui.other.Configurations;
 
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import com.example.ispw2.view.gui.other.LocalDateAdapter;
+
+import com.example.ispw2.view.gui.other.Wrapper.ClientiWrapper;
 import com.google.gson.*;
-import org.w3c.dom.events.Event;
 
 
 public class UserJSONDAO implements UserDAO {
@@ -31,7 +32,7 @@ public class UserJSONDAO implements UserDAO {
     private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     @Override
-    public void nuovoCliente(Cliente cliente) throws EmailGiaInUsoException, DAOException {
+    public void nuovoCliente(RegisterBean cliente) throws EmailGiaInUsoException, DAOException {
 
         Path userDirectory = null;
 
@@ -48,47 +49,44 @@ public class UserJSONDAO implements UserDAO {
             }
 
             // Crea la directory dell'utente e il file di informazioni
-            userDirectory = Files.createDirectories(Paths.get(BASE_DIRECTORY, cliente.getEmail()));
-            Path userInfoFile = userDirectory.resolve(ConfigurationJSN.USER_INFO_FILE_NAME);
+            userDirectory = Path.of(BASE_DIRECTORY);
+            //Path userInfoFile = userDirectory.resolve(ConfigurationJSN.USER_INFO_FILE_NAME);
             Path clienteInfoFile = userDirectory.resolve(ConfigurationJSN.COSTUMER_INFO_FILE_NAME);
 
-            //divido le info per i due file
-            var userInfo = new LoginBean(cliente.getEmail(), cliente.getPassword(), "utente registrato");
-            var clienteInfo = new Cliente(cliente.getEmail(), cliente.getPassword(), cliente.getName(), cliente.getSurname(), LocalDate.now(), null);
+            Cliente clienteInfo = new Cliente(cliente.getEmail(), cliente.getPassword(), cliente.getName(), cliente.getSurname(), cliente.getData_registrazione(),cliente.getPrenotazione_pendente());
 
             // Serializza l'oggetto Login in formato JSON e scrivi nel file
-            String json = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create().toJson(userInfo);
-            Files.writeString(userInfoFile, json);
-            json = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create().toJson(clienteInfo);
-            Files.writeString(clienteInfoFile, json);
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Cliente.class, new ClienteAdapter()) // per i campi privati di Cliente
+                    //.registerTypeAdapter(Prenotazione.class, new PrenotazioneAdapter()) //per i campi privati di prenotazione
+                    .setPrettyPrinting()
+                    .create();
 
-        } catch (JsonIOException | IOException e) {
-
-            if(userDirectory!=null) {
-                try {
-                    /*viene creata una classe anonima che estende SimpleFileVisitor<Path>.
-                    La classe anonima permette di sovrascrivere i metodi visitFile e postVisitDirectory senza
-                    dover dichiarare esplicitamente una nuova classe che estenda SimpleFileVisitor.
-                    */
-                    Files.walkFileTree(userDirectory, new SimpleFileVisitor<>() {
-                        @Override
-                        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                            Files.delete(file); // Rimuove il file
-                            return FileVisitResult.CONTINUE;
-                        }
-
-                        @Override
-                        public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                            Files.delete(dir); // Rimuove la directory vuota
-                            return FileVisitResult.CONTINUE;
-                        }
-                    });
-                } catch (IOException ex) {
-                    log.severe(e.getMessage());
-                    throw new DAOException("Errore in UserJSONDAO (rimuovo directory): " + e.getMessage());
+            ClientiWrapper wrapper;
+            if (Files.exists(clienteInfoFile)) {
+                try (Reader reader = Files.newBufferedReader(clienteInfoFile)) {
+                    wrapper = gson.fromJson(reader, ClientiWrapper.class);
+                    if (wrapper == null) wrapper = new ClientiWrapper();
                 }
+            } else {
+                System.out.println("il file non esiste");
+                wrapper = new ClientiWrapper();
             }
 
+            // Aggiungo il nuovo cliente
+            //wrapper.addCliente(clienteInfo);
+            wrapper.getClienti();
+            System.out.println("funzione getClienti:"+gson.toJson(wrapper));
+            wrapper.addCliente(clienteInfo);
+            System.out.println("funzione con add:"+gson.toJson(wrapper));
+
+            // Scrivo il file JSON aggiornato
+            try (Writer writer = Files.newBufferedWriter(clienteInfoFile)) {
+                gson.toJson(wrapper, writer);
+            }
+            System.out.println("Nuovo cliente registrato con successo!");
+
+        } catch (JsonIOException | IOException e) {
             log.severe("Error in UserJSONDAO (inserimento cliente): " + e.getMessage());
             throw new DAOException();
         }

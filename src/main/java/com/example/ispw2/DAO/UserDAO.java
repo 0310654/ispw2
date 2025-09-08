@@ -1,22 +1,21 @@
 package com.example.ispw2.DAO;
 
 import com.example.ispw2.bean.LoginBean;
+import com.example.ispw2.bean.RegisterBean;
 import com.example.ispw2.exceptions.DAOException;
 import com.example.ispw2.exceptions.EmailGiaInUsoException;
 import com.example.ispw2.exceptions.UserNonTrovatoException;
 import com.example.ispw2.model.Cliente;
-import com.example.ispw2.model.Evento;
 import com.example.ispw2.model.Organizzatore;
 import com.example.ispw2.model.Prenotazione;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public interface UserDAO {
 
     /** Inserimento dell'utente in persistenza
      * Valore di ritorno booleano per verificare la correttezza dell'operazione */
-    void nuovoCliente(Cliente cliente) throws EmailGiaInUsoException, DAOException;
+    void nuovoCliente(RegisterBean cliente) throws EmailGiaInUsoException, DAOException;
 
     //TODO non so se levare o meno da qui
     Prenotazione loadPrenotazione(String email) throws UserNonTrovatoException, DAOException;

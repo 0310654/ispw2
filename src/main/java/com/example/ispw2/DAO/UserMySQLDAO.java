@@ -2,6 +2,7 @@ package com.example.ispw2.DAO;
 
 import com.example.ispw2.altro.Printer;
 import com.example.ispw2.bean.LoginBean;
+import com.example.ispw2.bean.RegisterBean;
 import com.example.ispw2.exceptions.DAOException;
 import com.example.ispw2.exceptions.EmailGiaInUsoException;
 import com.example.ispw2.exceptions.UserNonTrovatoException;
@@ -47,14 +48,15 @@ public class UserMySQLDAO implements UserDAO {
     }
 
     @Override
-    public void nuovoCliente(Cliente cliente) throws EmailGiaInUsoException, DAOException {
+    public void nuovoCliente(RegisterBean cliente) throws EmailGiaInUsoException, DAOException {
         try{
 
             Connection conn = Connector.getConnection();
 
             conn.setAutoCommit(false);
+            Cliente client = new Cliente(cliente.getEmail(), cliente.getPassword(), cliente.getName(),cliente.getSurname(), cliente.getData_registrazione(), (Prenotazione) null);
 
-            if(LoginQuery.nuovoCliente(conn, cliente) == 0) {
+            if(LoginQuery.nuovoCliente(conn, client) == 0) {
                 throw new DAOException("Error in UserMySQLDAO");
             }
 

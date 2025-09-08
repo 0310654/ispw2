@@ -7,16 +7,16 @@ import com.example.ispw2.exceptions.DAOException;
 import com.example.ispw2.exceptions.UserNonSupportatoException;
 import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Organizzatore;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class LoginTest {
-
-
 
     private void testClienteLogin() {
         LoginBean loginBean = new LoginBean(
@@ -40,7 +40,7 @@ public class LoginTest {
             System.out.println("prima: " + righe.get(1));
             righe.set(1, "PERSISTENCE_TYPE=MYSQL");
             System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe);
+            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -54,7 +54,7 @@ public class LoginTest {
             System.out.println("prima: " + righe.get(1));
             righe.set(1, "PERSISTENCE_TYPE=demo");
             System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe);
+            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -68,7 +68,7 @@ public class LoginTest {
             System.out.println("prima: " + righe.get(1));
             righe.set(1, "PERSISTENCE_TYPE=JSON");
             System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe);
+            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -99,7 +99,7 @@ public class LoginTest {
             System.out.println("prima: " + righe.get(1));
             righe.set(1, "PERSISTENCE_TYPE=JSON");
             System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe);
+            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -113,7 +113,7 @@ public class LoginTest {
             System.out.println("prima: " + righe.get(1));
             righe.set(1, "PERSISTENCE_TYPE=MYSQL");
             System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe);
+            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -127,7 +127,7 @@ public class LoginTest {
             System.out.println("prima: " + righe.get(1));
             righe.set(1, "PERSISTENCE_TYPE=demo");
             System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe);
+            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

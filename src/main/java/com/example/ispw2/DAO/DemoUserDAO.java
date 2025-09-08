@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import com.example.ispw2.altro.Printer;
 import com.example.ispw2.bean.FiltriBean;
 import com.example.ispw2.bean.LoginBean;
+import com.example.ispw2.bean.RegisterBean;
 import com.example.ispw2.exceptions.DAOException;
 import com.example.ispw2.exceptions.EmailGiaInUsoException;
 import com.example.ispw2.exceptions.UserNonTrovatoException;
@@ -86,14 +87,17 @@ public class DemoUserDAO implements UserDAO {
     }
 
     @Override
-    public void nuovoCliente(Cliente cliente) throws EmailGiaInUsoException, DAOException {
+    public void nuovoCliente(RegisterBean cliente) throws EmailGiaInUsoException, DAOException {
+        Cliente client = new Cliente(cliente.getEmail(), cliente.getPassword(), cliente.getName(),cliente.getSurname(), cliente.getData_registrazione(), (Prenotazione) null);
+
+
         for (User user : users){
             if(user.getEmail().equals(cliente.getEmail())){
                 throw new EmailGiaInUsoException();
             }
         }
 
-        if(!users.add(cliente)){
+        if(!users.add(client)){
             log.severe("Errore in RegisterController: cerco di aggiungere il nuovo cliente alla user list.");
             Printer.errorPrint("Errore durante la registrazione.");
             throw new DAOException();
