@@ -67,5 +67,8 @@ public class LoginController {
     }
 
 
+    public void setUser(User u) {
+        this.user = u;
+    }
 }
 

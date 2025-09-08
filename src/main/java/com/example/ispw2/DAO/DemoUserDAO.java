@@ -45,6 +45,13 @@ public class DemoUserDAO implements UserDAO {
                 prenotazione)
         );
 
+        users.add(new Cliente("anna.bianchi@example.com",
+                "annaPass!",
+                "Anna",
+                "Bianchi",
+                data_registrazione,
+                null));
+
 
         ArrayList<String> settori1 = new ArrayList<>(List.of("VIP", "Standard", "Economy"));
         ArrayList<Double> prezzi1 = new ArrayList<>(List.of(80.0, 50.0, 30.0));

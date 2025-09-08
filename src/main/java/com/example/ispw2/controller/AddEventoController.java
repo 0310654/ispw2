@@ -69,7 +69,7 @@ public class AddEventoController {
                 eventBean.getNum_posti_settore(),
                 eventBean.getDescrizione());
 
-        EventiDAO eventiDAO = DAOFactory.getDAOFactory().addEventiDAO();
+        EventiDAO eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
         try {
             eventiDAO.addEvento(evento);
         } catch (SQLException e) {

@@ -1,14 +1,11 @@
 package com.example.ispw2.view.gui.controller;
 
-import com.example.ispw2.bean.LoginBean;
 import com.example.ispw2.bean.PrenotazioniBean;
-import com.example.ispw2.controller.HomeClienteController;
 import com.example.ispw2.controller.LoginController;
 import com.example.ispw2.controller.PrenotazioniController;
 import com.example.ispw2.exceptions.MaxPendingBorrowsException;
 import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Evento;
-import com.example.ispw2.model.User;
 import com.example.ispw2.view.gui.other.Configurations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +21,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class SchedaEventoGUI {
@@ -101,8 +97,7 @@ public class SchedaEventoGUI {
                 user.getSurname(),
                 evento.getData_evento(),
                 LocalDateTime.now() ,
-                "PENDENTE",
-                pendenti);
+                "PENDENTE");
 
         PrenotazioniController.getInstance();
 

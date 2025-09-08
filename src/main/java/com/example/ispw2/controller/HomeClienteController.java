@@ -43,16 +43,10 @@ public class HomeClienteController {
         //prendo la lista di tutti gli eventi dal DAO
         EventiDAO eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
         ArrayList<Evento> eventi = eventiDAO.getEventi();
-        /*System.out.println("tutti gli eventi:");
-        for(Evento evento : eventi) {
-            System.out.println(evento);
-        }*/
         //creo una lista vuota da riempire
         eventi_filtrati = new ArrayList<>();
-
         double prezzoMin = 0;
         double prezzoMax = Double.MAX_VALUE;
-
         String prezzoSelezionato = selectedBean.getPrezzo();
         if (prezzoSelezionato != null && prezzoSelezionato.matches("\\d+(?:\\.\\d+)?€-\\d+(?:\\.\\d+)?€")) {
             Pattern pattern = Pattern.compile("(\\d+(?:\\.\\d+)?)€-(\\d+(?:\\.\\d+)?)€");
@@ -71,16 +65,13 @@ public class HomeClienteController {
             if (!tipoOk || !localitaOk) {
                 continue; // Salta questo evento se non rispetta i filtri base
             }
-
             // Controlliamo se almeno un settore rientra nel range di prezzo
             boolean settoreValido = false;
             for (Double prezzoSettore : evento.getPrezzo_settore()) {
                 if (prezzoSettore >= prezzoMin && prezzoSettore <= prezzoMax) {
                     settoreValido = true;
-                    //break; // Basta trovarne uno, non serve continuare
                 }
             }
-
             if (settoreValido) {
                 eventi_filtrati.add(evento);
             }

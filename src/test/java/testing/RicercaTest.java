@@ -1,36 +1,60 @@
 package testing;
 
-import com.example.ispw2.bean.EventBean;
-import com.example.ispw2.bean.LoginBean;
+import com.example.ispw2.DAO.factory.DAOFactory;
+import com.example.ispw2.bean.FiltriBean;
 import com.example.ispw2.bean.SelectedBean;
-import com.example.ispw2.controller.AddEventoController;
 import com.example.ispw2.controller.HomeClienteController;
-import com.example.ispw2.controller.HomeOrganizzatoreController;
-import com.example.ispw2.controller.LoginController;
-import com.example.ispw2.exceptions.CredenzialiErrateException;
-import com.example.ispw2.exceptions.DAOException;
-import com.example.ispw2.exceptions.UserNonSupportatoException;
-import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Evento;
-import com.example.ispw2.view.gui.other.Connector;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+//FUNZIONA
 
 public class RicercaTest {
 
 
+    private void getFiltritest() {
+        FiltriBean filtriBean = HomeClienteController.getInstance().getFiltri();
+        System.out.println(filtriBean.toString());
+    }
     @Test
-    public void ricercatest() {
+    public void testFiltriMYSQL(){
+        changeType("MYSQL");
+        DAOFactory.refreshDAOFactory(true);
+        getFiltritest();
+    }
+    @Test
+    public void testFiltriDEMO(){
+        changeType("demo");
+        DAOFactory.refreshDAOFactory(true);
+        getFiltritest();
+    }
+
+
+    @Test
+    public void testRicercaMYSQL(){
+        changeType("MYSQL");
+        DAOFactory.refreshDAOFactory(true);
+        ricercatest();
+    }
+
+    @Test
+    public void testRicercaDEMO(){
+        changeType("demo");
+        DAOFactory.refreshDAOFactory(true);
+        ricercatest();
+    }
+
+
+    private void ricercatest() {
         LocalDate data = LocalDate.of(2025, 9, 12);
         LocalTime ora = LocalTime.of(10, 30);
         LocalDateTime dt = LocalDateTime.of(data, ora);
@@ -48,4 +72,23 @@ public class RicercaTest {
             System.out.println(e.toString());
         }
     }
+
+    private void changeType(String persistence){
+        File file = new File("src/main/resources/configurations.properties");
+        Properties props = new Properties();
+
+        try (FileInputStream fis = new FileInputStream(file)) {
+            props.load(fis);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        props.setProperty("PERSISTENCE_TYPE", persistence);
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            props.store(fos, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

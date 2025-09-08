@@ -4,33 +4,32 @@ import com.example.ispw2.DAO.*;
 
 public class DemoDAOFactory extends DAOFactory {
 
+    DemoUserDAO demoUserDAO;
+    DemoEventiDAO demoEventiDAO;
+    DemoPrenotazioneDAO demoPrenotazioneDAO;
+
     @Override
     public UserDAO createUserDAO() {
-        return new DemoUserDAO();
+        if(demoUserDAO == null) {
+            demoUserDAO = new DemoUserDAO();
+        }
+        return demoUserDAO;
     }
 
     @Override
     public EventiDAO getEventiDAO() {
-        return new DemoEventiDAO();
-    }
-
-    @Override
-    public EventiDAO addEventiDAO() {
-        return new DemoEventiDAO();
-    }
-
-    @Override
-    public PrenotazioniDAO addPrenotazioniDAO() {
-        return new DemoPrenotazioneDAO();
+        if(demoEventiDAO == null) {
+            demoEventiDAO = new DemoEventiDAO();
+        }
+        return demoEventiDAO;
     }
 
     @Override
     public PrenotazioniDAO getPrenotazioniDAO() {
-        return new DemoPrenotazioneDAO();
+        if(demoPrenotazioneDAO == null) {
+            demoPrenotazioneDAO = new DemoPrenotazioneDAO();
+        }
+        return demoPrenotazioneDAO;
     }
 
-    /*@Override
-    public SettoreMySQLDAO getNumMaxSettoriDAO() {
-        return null;
-    }*/
 }

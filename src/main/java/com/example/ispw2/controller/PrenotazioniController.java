@@ -15,7 +15,11 @@ public class PrenotazioniController {
 
     private static PrenotazioniController instance;
     private Prenotazione prenotazione;
-    private User user;
+    private Cliente cliente;
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
 
     private PrenotazioniController() {}
@@ -55,25 +59,33 @@ public class PrenotazioniController {
         return String.valueOf(nuovoCodice);
     }
 
+
     public void prenotaEvento(PrenotazioniBean prenotazioneBean) throws MaxPendingBorrowsException {
+
+        if(cliente == null) {
+            this.cliente = (Cliente) LoginController.getInstance().getUser();
+        }
+        System.out.println("sono dentro prenotaeventocontroller"+ cliente.toString());
+
         //controllo che il costumer possa effettuare la prenotazione
-        if(!prenotazioneBean.isPrenotazioni_pendenti()) {
+        if(cliente.getPrenotazioni_pendenti() == null) {
             //creo model a partire dalla bean
 
-            this.user = LoginController.getInstance().getUser();
             this.prenotazione = new Prenotazione(prenotazioneBean.getNome_evento(),
                     prenotazioneBean.getCod_prenotazione(),
-                    user.getName(),
-                    user.getSurname(),
+                    cliente.getName(),
+                    cliente.getSurname(),
                     prenotazioneBean.getData_evento(),
                     LocalDateTime.now(),
                     prenotazioneBean.getStato_prenotazione());
 
-            PrenotazioniDAO prenotazioniDAO = DAOFactory.getDAOFactory().addPrenotazioniDAO();
+            PrenotazioniDAO prenotazioniDAO = DAOFactory.getDAOFactory().getPrenotazioniDAO();
             prenotazioniDAO.addPrenotazione(prenotazione);
 
             //ho aggiunto la prenotazione tra le prenotazioni pendenti del cliente
             ((Cliente) LoginController.getInstance().getUser()).setPrenotazionePendente(prenotazione);
+
+            System.out.println("ho aggiunto l'evento..."+ cliente.toString());
 
         }else{
             throw new MaxPendingBorrowsException();

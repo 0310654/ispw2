@@ -22,6 +22,8 @@ import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//FUNZIONA
+
 public class RegTest {
 
     private void testReg() {
@@ -84,27 +86,18 @@ public class RegTest {
                 .setPrettyPrinting()
                 .registerTypeAdapter(Cliente.class, new ClienteAdapter()) // se hai un adapter
                 .create();
-
         try {
             ClientiWrapper wrapper;
-
-            // Leggi il file in wrapper
             if (Files.exists(Path.of(FILE_PATH))) {
                 try (Reader reader = Files.newBufferedReader(Path.of(FILE_PATH))) {
                     wrapper = gson.fromJson(reader, ClientiWrapper.class);
                     if (wrapper == null) wrapper = new ClientiWrapper();
                 }
-
-                // Rimuovi il cliente dalla lista
                 wrapper.getClienti().removeIf(c -> c.getEmail().equalsIgnoreCase("test2@email.com"));
-
-                // Riscrivi l’intero file
                 try (Writer writer = Files.newBufferedWriter(Path.of(FILE_PATH))) {
                     gson.toJson(wrapper, writer);
                 }
-
                 System.out.println("Cliente rimosso con successo!");
-
             } else {
                 System.out.println("File non trovato!");
             }

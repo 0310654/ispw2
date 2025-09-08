@@ -12,9 +12,9 @@ public class PrenotazioniBean {
     private LocalDateTime data_evento;
     private LocalDateTime data_prenotazione;
     private String stato_prenotazione;
-    private boolean prenotazioni_pendenti;
+    //private boolean prenotazioni_pendenti;
 
-    public PrenotazioniBean(String nome_evento, String cod_prenotazione, String nome, String cognome,LocalDateTime data_evento,LocalDateTime data_prenotazione, String stato_prenotazione, boolean prenotazioni_pendenti){
+    public PrenotazioniBean(String nome_evento, String cod_prenotazione, String nome, String cognome,LocalDateTime data_evento,LocalDateTime data_prenotazione, String stato_prenotazione/*, boolean prenotazioni_pendenti*/){
         this.nome_evento = nome_evento;
         this.cod_prenotazione = cod_prenotazione;
         this.nome = nome;
@@ -22,7 +22,7 @@ public class PrenotazioniBean {
         this.data_evento = data_evento;
         this.data_prenotazione = data_prenotazione;
         this.stato_prenotazione = stato_prenotazione;
-        this.prenotazioni_pendenti = prenotazioni_pendenti;
+        //this.prenotazioni_pendenti = prenotazioni_pendenti;
     }
 
 
@@ -82,11 +82,11 @@ public class PrenotazioniBean {
         this.stato_prenotazione = stato_prenotazione;
     }
 
-    public boolean isPrenotazioni_pendenti() {
+    /*public boolean isPrenotazioni_pendenti() {
         return prenotazioni_pendenti;
     }
 
     public void setPrenotazioni_pendenti(boolean prenotazioni_pendenti) {
         this.prenotazioni_pendenti = prenotazioni_pendenti;
-    }
+    }*/
 }

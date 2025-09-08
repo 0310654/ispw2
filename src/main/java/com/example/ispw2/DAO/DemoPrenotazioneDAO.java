@@ -41,6 +41,7 @@ public class DemoPrenotazioneDAO implements PrenotazioniDAO {
 
     @Override
     public void addPrenotazione(Prenotazione prenotazione) {
+        System.out.println("aggiungo prenotazione:"+prenotazione);
         prenotazioni.add(prenotazione);
     }
 }

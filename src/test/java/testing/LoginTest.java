@@ -1,20 +1,20 @@
 package testing;
 
+import com.example.ispw2.DAO.factory.DAOFactory;
 import com.example.ispw2.bean.LoginBean;
 import com.example.ispw2.controller.LoginController;
 import com.example.ispw2.exceptions.CredenzialiErrateException;
 import com.example.ispw2.exceptions.DAOException;
-import com.example.ispw2.exceptions.UserNonSupportatoException;
 import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Organizzatore;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
-import java.util.List;
+import java.util.Properties;
+
+//FUNZIONA
 
 public class LoginTest {
 
@@ -32,46 +32,24 @@ public class LoginTest {
         }
 
     }
+
+
     @Test
     public void testLoginClienteMYSQL(){
-        File file = new File("src/main/resources/configurations.properties");
-        try {
-            List<String> righe = Files.readAllLines(file.toPath());
-            System.out.println("prima: " + righe.get(1));
-            righe.set(1, "PERSISTENCE_TYPE=MYSQL");
-            System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        changeType("MYSQL");
+        DAOFactory.refreshDAOFactory(true);
         testClienteLogin();
     }
     @Test
     public void testLoginClienteDEMO(){
-        File file = new File("src/main/resources/configurations.properties");
-        try {
-            List<String> righe = Files.readAllLines(file.toPath());
-            System.out.println("prima: " + righe.get(1));
-            righe.set(1, "PERSISTENCE_TYPE=demo");
-            System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        changeType("demo");
+        DAOFactory.refreshDAOFactory(true);
         testClienteLogin();
     }
     @Test
     public void testLoginClienteJSON(){
-        File file = new File("src/main/resources/configurations.properties");
-        try {
-            List<String> righe = Files.readAllLines(file.toPath());
-            System.out.println("prima: " + righe.get(1));
-            righe.set(1, "PERSISTENCE_TYPE=JSON");
-            System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        changeType("JSON");
+        DAOFactory.refreshDAOFactory(true);
         testClienteLogin();
     }
 
@@ -93,45 +71,38 @@ public class LoginTest {
 
     @Test
     public void testLoginOrganizzatoreJSON(){
-        File file = new File("src/main/resources/configurations.properties");
-        try {
-            List<String> righe = Files.readAllLines(file.toPath());
-            System.out.println("prima: " + righe.get(1));
-            righe.set(1, "PERSISTENCE_TYPE=JSON");
-            System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        changeType("JSON");
+        DAOFactory.refreshDAOFactory(true);
         testOrganizzatoreLogin();
     }
     @Test
     public void testLoginOrganizzatoreMYSQL(){
-        File file = new File("src/main/resources/configurations.properties");
-        try {
-            List<String> righe = Files.readAllLines(file.toPath());
-            System.out.println("prima: " + righe.get(1));
-            righe.set(1, "PERSISTENCE_TYPE=MYSQL");
-            System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        changeType("MYSQL");
+        DAOFactory.refreshDAOFactory(true);
         testOrganizzatoreLogin();
     }
     @Test
     public void testLoginOrganizzatoreDEMO(){
+        changeType("demo");
+        DAOFactory.refreshDAOFactory(true);
+        testOrganizzatoreLogin();
+    }
+
+    private void changeType(String persistence){
         File file = new File("src/main/resources/configurations.properties");
-        try {
-            List<String> righe = Files.readAllLines(file.toPath());
-            System.out.println("prima: " + righe.get(1));
-            righe.set(1, "PERSISTENCE_TYPE=demo");
-            System.out.println("dopo: " + righe.get(1));
-            Files.write(file.toPath(), righe, StandardOpenOption.TRUNCATE_EXISTING);
+        Properties props = new Properties();
+
+        try (FileInputStream fis = new FileInputStream(file)) {
+            props.load(fis);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        testOrganizzatoreLogin();
+        props.setProperty("PERSISTENCE_TYPE", persistence);
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            props.store(fos, null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

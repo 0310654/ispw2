@@ -15,22 +15,8 @@ public class JsonDAOFactory extends DAOFactory {
     }
 
     @Override
-    public EventiDAO addEventiDAO() {
-        return null;
-    }
-
-    @Override
-    public PrenotazioniDAO addPrenotazioniDAO() {
-        return null;
-    }
-
-    @Override
     public PrenotazioniDAO getPrenotazioniDAO() {
         return null;
     }
 
-    /*@Override
-    public SettoreMySQLDAO getNumMaxSettoriDAO() {
-        return null;
-    }*/
 }

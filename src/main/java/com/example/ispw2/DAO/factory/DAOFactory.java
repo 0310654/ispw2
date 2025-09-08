@@ -83,11 +83,9 @@ public abstract class DAOFactory {
 
     public abstract EventiDAO getEventiDAO();
 
-    public abstract EventiDAO addEventiDAO();
+    //public abstract EventiDAO addEventiDAO();
 
-    public abstract PrenotazioniDAO addPrenotazioniDAO();
+    //public abstract PrenotazioniDAO addPrenotazioniDAO();
 
     public abstract PrenotazioniDAO getPrenotazioniDAO();
-
-    //public abstract SettoreMySQLDAO getNumMaxSettoriDAO();
 }

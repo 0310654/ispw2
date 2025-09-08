@@ -9,7 +9,7 @@ public class Cliente extends User {
 
     private LocalDate data_registrazione;
     private Prenotazione prenotazioni_pendenti;
-    private String pending;
+
 
     public Cliente(String email, String password, String name, String surname, LocalDate data_registrazione, Prenotazione prenotazioni_pendenti) {
         super(email, name, surname, password, "utente registrato");
@@ -43,9 +43,14 @@ public class Cliente extends User {
         sb.append("Nome: " + getName() + " | ");
         sb.append("Cognome: " + getSurname() + " | ");
         sb.append("Tipo user: " + getType() + " | ");
-
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         sb.append("Data: " + data_registrazione.format(dtf) + " | ");
+        if(prenotazioni_pendenti != null) {
+            sb.append("Prenotazione pendente: " + prenotazioni_pendenti.getCod_prenotazione());
+        }else{
+            sb.append("Non ci sono prenotazioni pendenti");
+        }
+
 
         return sb.toString();
     }

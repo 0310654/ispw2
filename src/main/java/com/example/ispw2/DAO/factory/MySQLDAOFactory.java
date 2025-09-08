@@ -15,23 +15,9 @@ public class MySQLDAOFactory extends DAOFactory {
     }
 
     @Override
-    public EventiDAO addEventiDAO() {
-        return new EventiMySQLDAO();
-    }
-
-    @Override
-    public PrenotazioniDAO addPrenotazioniDAO() {
-        return new PrenotazioniMySQLDAO();
-    }
-
-    @Override
     public PrenotazioniDAO getPrenotazioniDAO() {
         return new PrenotazioniMySQLDAO();
     }
 
-    /*@Override
-    public SettoreMySQLDAO getNumMaxSettoriDAO() {
-        return new SettoreMySQLDAO();
-    }*/
 
 }

@@ -22,16 +22,10 @@ public class PrenotazioniMySQLDAO implements PrenotazioniDAO {
     @Override
     public void addPrenotazione(Prenotazione prenotazione) {
         String nome_evento = prenotazione.getNome_evento();
-        System.out.println(nome_evento);
         String cod_evento = getCodEvento(nome_evento);
-        System.out.println(cod_evento);
-
         String nome = prenotazione.getNome();
-        System.out.println(nome);
         String cognome = prenotazione.getCognome();
-        System.out.println(cognome);
         String email =  getEmailUser(nome, cognome);
-        System.out.println(email);
 
         try {
             PrenotazioniQuery.addPrenotazione(Connector.getConnection(),

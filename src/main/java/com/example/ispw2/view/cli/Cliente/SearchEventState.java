@@ -1,22 +1,17 @@
 package com.example.ispw2.view.cli.Cliente;
 
 import com.example.ispw2.altro.Printer;
-import com.example.ispw2.bean.EventBean;
-import com.example.ispw2.bean.FiltriBean;
 import com.example.ispw2.bean.PrenotazioniBean;
 import com.example.ispw2.bean.SelectedBean;
 import com.example.ispw2.controller.HomeClienteController;
 import com.example.ispw2.controller.PrenotazioniController;
-import com.example.ispw2.exceptions.DAOException;
 import com.example.ispw2.exceptions.MaxPendingBorrowsException;
 import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Evento;
-import com.example.ispw2.model.Prenotazione;
 import com.example.ispw2.view.cli.State;
 import com.example.ispw2.view.cli.StateMachine;
 import com.example.ispw2.view.gui.other.Configurations;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Logger;
@@ -51,8 +46,7 @@ public class SearchEventState extends State {
                 cliente.getSurname(),
                 evento.getData_evento(),
                 LocalDateTime.now(),
-                "PENDING",
-                false);
+                "PENDING");
 
         try {
             PrenotazioniController prenotazioniController = PrenotazioniController.getInstance();
