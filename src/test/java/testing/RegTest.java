@@ -1,14 +1,14 @@
 package testing;
 
-import com.example.ispw2.DAO.factory.DAOFactory;
-import com.example.ispw2.bean.RegisterBean;
+import com.example.ispw2.engineering.factory.DAOFactory;
+import com.example.ispw2.engineering.bean.RegisterBean;
 import com.example.ispw2.controller.RegisterController;
-import com.example.ispw2.exceptions.DAOException;
-import com.example.ispw2.exceptions.EmailGiaInUsoException;
+import com.example.ispw2.engineering.exceptions.DAOException;
+import com.example.ispw2.engineering.exceptions.EmailGiaInUsoException;
 import com.example.ispw2.model.Cliente;
-import com.example.ispw2.view.gui.other.Adapter.ClienteAdapter;
-import com.example.ispw2.view.gui.other.Connector;
-import com.example.ispw2.view.gui.other.Wrapper.ClientiWrapper;
+import com.example.ispw2.altro.Adapter.ClienteAdapter;
+import com.example.ispw2.altro.Connector;
+import com.example.ispw2.altro.Wrapper.ClientiWrapper;
 import com.google.gson.*;
 import org.junit.jupiter.api.Test;
 

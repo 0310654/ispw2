@@ -1,4 +1,5 @@
 package com.example.ispw2.view.gui.other;
+import com.example.ispw2.controller.HomeClienteController;
 import com.example.ispw2.model.*;
 import com.example.ispw2.view.gui.controller.HomeClienteGUI;
 import com.example.ispw2.view.gui.controller.NoResultsViewGUI;
@@ -37,6 +38,7 @@ public class EventoCell extends ListCell<Evento> {
         dettagliButton.setOnAction(event -> {
             Evento selectedEvento = getItem();
             if (selectedEvento != null) {
+                System.out.println(selectedEvento.getNome());
                 apriSchedaEvento(selectedEvento);
             }
         });
@@ -57,14 +59,14 @@ public class EventoCell extends ListCell<Evento> {
 
     private void apriSchedaEvento(Evento evento) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ispw2/view/evento-view.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ispw2/evento-view.fxml"));
+            Parent parent = loader.load();
             // Passo i dati al controller della scheda evento
-            SchedaEventoController controller = loader.getController();
-            controller.setEvento(evento);
+            SchedaEventoGUI schedaEventoGUI = loader.getController();
+            schedaEventoGUI.setEvento(evento);
 
             loader.setControllerFactory(c -> new SchedaEventoGUI());
-            Parent parent = loader.load();
+
             Scene scene = new Scene(parent);
 
             Stage stage = (Stage) dettagliButton.getScene().getWindow();

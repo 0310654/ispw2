@@ -56,24 +56,6 @@ public class Evento {
 
     public String toString() {
 
-        /*System.out.println(settore.size());
-        for(String str : settore) {
-            System.out.println(str);
-        }
-        System.out.println(disponibilita_settore.size());
-        for(double d : disponibilita_settore) {
-            System.out.println(d);
-        }
-        System.out.println(prezzo_settore.size());
-        for(double d : prezzo_settore) {
-            System.out.println(d);
-        }
-        System.out.println(num_posti_settore.size());
-        for(double d : num_posti_settore) {
-            System.out.println(d);
-        }*/
-
-
         StringBuilder sb = new StringBuilder();
         sb.append("Codice: " + codice+ " | ");
         sb.append("Nome evento: " + nome + " | ");

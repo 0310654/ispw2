@@ -1,11 +1,11 @@
 package com.example.ispw2.view.gui.controller;
 
 import com.example.ispw2.altro.Printer;
-import com.example.ispw2.bean.RegisterBean;
+import com.example.ispw2.engineering.bean.RegisterBean;
 import com.example.ispw2.controller.RegisterController;
-import com.example.ispw2.exceptions.DAOException;
-import com.example.ispw2.exceptions.EmailGiaInUsoException;
-import com.example.ispw2.exceptions.InvalidEmailException;
+import com.example.ispw2.engineering.exceptions.DAOException;
+import com.example.ispw2.engineering.exceptions.EmailGiaInUsoException;
+import com.example.ispw2.engineering.exceptions.InvalidEmailException;
 import com.example.ispw2.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

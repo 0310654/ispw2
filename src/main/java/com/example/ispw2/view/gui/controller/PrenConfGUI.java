@@ -4,7 +4,8 @@ import com.example.ispw2.controller.PrenotazioniController;
 import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Prenotazione;
 import com.example.ispw2.model.User;
-import com.example.ispw2.view.gui.other.Configurations;
+import com.example.ispw2.altro.configurations.Configurations;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,18 +17,31 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class PrenConfGUI {
-    public Button backButton;
-    public TableColumn col_nome_evento;
-    public TableColumn col_cod_ticket;
-    public TableColumn col_nome_cliente;
-    public TableColumn col_cognome;
-    public TableColumn col_data_evento;
-    public TableColumn col_data_pren;
-    public TableColumn col_stato_pren;
-    public TableView<Prenotazione> tableInfo;
+    @FXML
+    private TableView<Prenotazione> tableInfo;
+
+    @FXML
+    private TableColumn<Prenotazione, String> col_nome_evento;
+    @FXML
+    private TableColumn<Prenotazione, String> col_cod_ticket;
+    @FXML
+    private TableColumn<Prenotazione, String> col_nome_cliente;
+    @FXML
+    private TableColumn<Prenotazione, String> col_cognome;
+    @FXML
+    private TableColumn<Prenotazione, String> col_data_evento;
+    @FXML
+    private TableColumn<Prenotazione, String> col_data_pren;
+    @FXML
+    private TableColumn<Prenotazione, String> col_stato_pren;
+
+    @FXML
+    private javafx.scene.control.Button backButton;
 
     protected User user;
     public void setUser(User user) {
@@ -39,9 +53,34 @@ public class PrenConfGUI {
 
     @FXML
     public void initialize() {
+        col_nome_evento.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getNome_evento()));
+
+        col_cod_ticket.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getCod_prenotazione()));
+
+        col_nome_cliente.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getNome()));
+
+        col_cognome.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getCognome()));
+
+        col_stato_pren.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getStato_prenotazione()));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        col_data_evento.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getData_evento().format(formatter)));
+
+        col_data_pren.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getData_prenotazione().format(formatter)));
+
         Prenotazione prenotazione = PrenotazioniController.getInstance().getPrenotazione();
-        // Popola la TableView con i dati del DAO
-        tableInfo.getItems().setAll(prenotazione);
+
+        if (prenotazione != null) {
+            tableInfo.getItems().setAll(List.of(prenotazione));
+        }
     }
 
 

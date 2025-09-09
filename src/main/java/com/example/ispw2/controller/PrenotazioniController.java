@@ -1,12 +1,11 @@
 package com.example.ispw2.controller;
 
-import com.example.ispw2.DAO.PrenotazioniDAO;
-import com.example.ispw2.DAO.factory.DAOFactory;
-import com.example.ispw2.bean.PrenotazioniBean;
-import com.example.ispw2.exceptions.MaxPendingBorrowsException;
+import com.example.ispw2.engineering.DAO.PrenotazioniDAO;
+import com.example.ispw2.engineering.factory.DAOFactory;
+import com.example.ispw2.engineering.bean.PrenotazioniBean;
+import com.example.ispw2.engineering.exceptions.MaxPendingResException;
 import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Prenotazione;
-import com.example.ispw2.model.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,6 +13,11 @@ import java.util.ArrayList;
 public class PrenotazioniController {
 
     private static PrenotazioniController instance;
+
+    public void setPrenotazione(Prenotazione prenotazione) {
+        this.prenotazione = prenotazione;
+    }
+
     private Prenotazione prenotazione;
     private Cliente cliente;
 
@@ -60,7 +64,7 @@ public class PrenotazioniController {
     }
 
 
-    public void prenotaEvento(PrenotazioniBean prenotazioneBean) throws MaxPendingBorrowsException {
+    public void prenotaEvento(PrenotazioniBean prenotazioneBean) throws MaxPendingResException {
 
         if(cliente == null) {
             this.cliente = (Cliente) LoginController.getInstance().getUser();
@@ -88,7 +92,7 @@ public class PrenotazioniController {
             System.out.println("ho aggiunto l'evento..."+ cliente.toString());
 
         }else{
-            throw new MaxPendingBorrowsException();
+            throw new MaxPendingResException();
         }
     }
 

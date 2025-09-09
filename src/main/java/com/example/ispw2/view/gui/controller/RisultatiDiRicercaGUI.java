@@ -4,6 +4,7 @@ import com.example.ispw2.model.User;
 import com.example.ispw2.view.gui.other.*;
 import com.example.ispw2.controller.HomeClienteController;
 import com.example.ispw2.model.Evento;
+import com.example.ispw2.altro.configurations.Configurations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -12,19 +13,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class RisultatiDiRicercaGUI {
 
     @FXML
-    private Button backBtn;
+    public Button backButton;
 
     @FXML
     public ListView listaEventi;
@@ -41,16 +40,11 @@ public class RisultatiDiRicercaGUI {
     public void backButton(ActionEvent actionEvent) {
         try {
             // Carica la HomeCliente
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ispw2/homecliente-view.fxml"));
-
-            // Passiamo l'utente loggato al controller della Home
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ispw2/ricerca-view.fxml"));
             loader.setControllerFactory(c -> new HomeClienteGUI((Cliente) user));
-
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
-
-            // Recupera lo stage attuale e cambia scena
-            Stage stage = (Stage) backBtn.getScene().getWindow();
+            Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
 
@@ -59,14 +53,12 @@ public class RisultatiDiRicercaGUI {
         }
     }
 
-
-
     public void initialize(){
         ArrayList<Evento> eventiRisultanti = HomeClienteController.getInstance().getEventiFiltrati();
         // Popolo la ListView
         listaEventi.getItems().addAll(eventiRisultanti);
-
         // Imposto la cell factory personalizzata
         listaEventi.setCellFactory(listView -> new EventoCell());
     }
+
 }

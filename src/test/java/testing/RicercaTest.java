@@ -1,8 +1,8 @@
 package testing;
 
-import com.example.ispw2.DAO.factory.DAOFactory;
-import com.example.ispw2.bean.FiltriBean;
-import com.example.ispw2.bean.SelectedBean;
+import com.example.ispw2.engineering.factory.DAOFactory;
+import com.example.ispw2.engineering.bean.FiltriBean;
+import com.example.ispw2.engineering.bean.SelectedBean;
 import com.example.ispw2.controller.HomeClienteController;
 import com.example.ispw2.model.Evento;
 import org.junit.jupiter.api.Test;

@@ -1,16 +1,13 @@
 package com.example.ispw2.controller;
 
-import com.example.ispw2.DAO.DemoUserDAO;
-import com.example.ispw2.DAO.UserDAO;
-import com.example.ispw2.DAO.factory.DAOFactory;
-import com.example.ispw2.bean.LoginBean;
-import com.example.ispw2.exceptions.CredenzialiErrateException;
-import com.example.ispw2.exceptions.DAOException;
-import com.example.ispw2.exceptions.UserNonSupportatoException;
-import com.example.ispw2.exceptions.UserNonTrovatoException;
-import com.example.ispw2.model.Cliente;
+import com.example.ispw2.engineering.DAO.UserDAO;
+import com.example.ispw2.engineering.factory.DAOFactory;
+import com.example.ispw2.engineering.bean.LoginBean;
+import com.example.ispw2.engineering.exceptions.CredenzialiErrateException;
+import com.example.ispw2.engineering.exceptions.DAOException;
+import com.example.ispw2.engineering.exceptions.UserNonTrovatoException;
 import com.example.ispw2.model.User;
-import com.example.ispw2.view.gui.other.Configurations;
+import com.example.ispw2.altro.configurations.Configurations;
 
 import java.io.IOException;
 import java.util.logging.Logger;

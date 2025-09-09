@@ -4,6 +4,7 @@ public class Filtri {
     private String flt;
     private String filterType;
 
+
     public Filtri(String flt, String filterType) {
         this.flt = flt;
         this.filterType = filterType;

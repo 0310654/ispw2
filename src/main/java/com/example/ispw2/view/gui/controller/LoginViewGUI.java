@@ -1,22 +1,20 @@
 package com.example.ispw2.view.gui.controller;
 
-import com.example.ispw2.bean.LoginBean;
+import com.example.ispw2.engineering.bean.LoginBean;
 import com.example.ispw2.controller.LoginController;
-import com.example.ispw2.exceptions.CredenzialiErrateException;
-import com.example.ispw2.exceptions.DAOException;
-import com.example.ispw2.exceptions.UserNonSupportatoException;
-import com.example.ispw2.exceptions.UserNonTrovatoException;
+import com.example.ispw2.engineering.exceptions.CredenzialiErrateException;
+import com.example.ispw2.engineering.exceptions.DAOException;
+import com.example.ispw2.engineering.exceptions.UserNonTrovatoException;
 import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Organizzatore;
 import com.example.ispw2.model.User;
-import com.example.ispw2.view.gui.other.Configurations;
+import com.example.ispw2.altro.configurations.Configurations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;

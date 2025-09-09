@@ -1,10 +1,10 @@
 package testing;
 
-import com.example.ispw2.DAO.factory.DAOFactory;
-import com.example.ispw2.bean.LoginBean;
+import com.example.ispw2.engineering.factory.DAOFactory;
+import com.example.ispw2.engineering.bean.LoginBean;
 import com.example.ispw2.controller.LoginController;
-import com.example.ispw2.exceptions.CredenzialiErrateException;
-import com.example.ispw2.exceptions.DAOException;
+import com.example.ispw2.engineering.exceptions.CredenzialiErrateException;
+import com.example.ispw2.engineering.exceptions.DAOException;
 import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Organizzatore;
 import org.junit.jupiter.api.Test;

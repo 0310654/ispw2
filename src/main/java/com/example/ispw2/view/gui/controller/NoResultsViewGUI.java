@@ -1,8 +1,5 @@
 package com.example.ispw2.view.gui.controller;
 
-import com.example.ispw2.bean.LoginBean;
-import com.example.ispw2.controller.HomeClienteController;
-import com.example.ispw2.controller.LoginController;
 import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.User;
 import javafx.event.ActionEvent;

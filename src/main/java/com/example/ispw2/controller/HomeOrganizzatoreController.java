@@ -1,11 +1,8 @@
 package com.example.ispw2.controller;
 
-import com.example.ispw2.DAO.DemoEventiDAO;
-import com.example.ispw2.DAO.DemoUserDAO;
-import com.example.ispw2.DAO.EventiDAO;
-import com.example.ispw2.DAO.factory.DAOFactory;
+import com.example.ispw2.engineering.DAO.EventiDAO;
+import com.example.ispw2.engineering.factory.DAOFactory;
 import com.example.ispw2.model.Evento;
-import com.example.ispw2.model.Organizzatore;
 
 import java.util.ArrayList;
 
@@ -23,16 +20,16 @@ public class HomeOrganizzatoreController {
 
 
     private ArrayList<Evento> iMieiEventi;
-    String nomeOrganizzatore = LoginController.getInstance().getUser().getName();
+    String emailOrganizzatore = LoginController.getInstance().getUser().getEmail();
 
-    public ArrayList<Evento> getEventi() {
+    public ArrayList<Evento> getMieiEventi() {
 
         EventiDAO eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
         ArrayList<Evento> eventi = eventiDAO.getEventi();
 
         iMieiEventi = new ArrayList<>();
         for(Evento evento : eventi) {
-            if(evento.getOrganizzatore().equals(nomeOrganizzatore)) {
+            if(evento.getOrganizzatore().equals(emailOrganizzatore)) {
                 iMieiEventi.add(evento);
             }
         }

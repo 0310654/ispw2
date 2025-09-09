@@ -21,32 +21,48 @@ public class HomeClienteState extends State {
     @Override
     public void execute(StateMachine stateMachine) {
         showMenu();
-
         Scanner scan = new Scanner(System.in);
-        int choice;
 
-        while(true) {
+        while (true) {
             Printer.print("Inserisci la tua scelta: ");
 
-            try{
-                choice = scan.nextInt();
-                scan.nextLine();
+            String line;
+            if (!scan.hasNextLine()) {
+                Printer.println("Fine input, terminazione loop...");
+                break; // EOF raggiunto, esci
+            }
 
-                switch (choice) {
-                    case 1 -> Printer.println("Non ancora implementato.");
-                    case 2 -> stateMachine.goNext(new SearchEventState(cliente));
-                    case 3 -> new Implementations().start();
-                    default -> Printer.invalidChoicePrint();
-                }
+            line = scan.nextLine().trim();
 
-            } catch (InputMismatchException e){
+            if (line.isEmpty()) {
+                Printer.println("Nessuna scelta inserita, uscita...");
+                break; // input vuoto, esci
+            }
+
+            int choice;
+            try {
+                choice = Integer.parseInt(line);
+            } catch (NumberFormatException e) {
                 Printer.invalidChoicePrint();
-                scan.nextLine();
-            }catch (NoSuchElementException e){
+                continue; // non numerico, richiedi di nuovo
+            }
+
+            if (choice == 1) {
+                Printer.println("Non ancora implementato.");
+            } else if (choice == 2) {
+                stateMachine.goNext(new SearchEventState(cliente));
+                return; // esci dal loop
+            } else if (choice == 3) {
+                new Implementations().start();
+                return; // esci dal loop
+            } else {
                 Printer.invalidChoicePrint();
             }
         }
     }
+
+
+
 
     @Override
     public void showMenu() {
@@ -54,5 +70,10 @@ public class HomeClienteState extends State {
         Printer.println("1) mostra il mio profilo");
         Printer.println("2) cerca un evento");
         Printer.println("3) logout");
+    }
+
+    @Override
+    public void showHeadline() {
+        Printer.printlnBlu("--------------HOME CLIENTE--------------");
     }
 }

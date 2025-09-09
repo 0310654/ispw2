@@ -1,6 +1,8 @@
 package com.example.ispw2.view.cli;
 
 
+import com.example.ispw2.view.cli.InitialStates.InitialState;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 

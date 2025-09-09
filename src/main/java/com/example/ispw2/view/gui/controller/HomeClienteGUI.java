@@ -1,26 +1,21 @@
 package com.example.ispw2.view.gui.controller;
 
-import com.example.ispw2.bean.FiltriBean;
-import com.example.ispw2.bean.RegisterBean;
-import com.example.ispw2.bean.SelectedBean;
+import com.example.ispw2.engineering.bean.FiltriBean;
+import com.example.ispw2.engineering.bean.SelectedBean;
 import com.example.ispw2.controller.HomeClienteController;
-import com.example.ispw2.controller.RegisterController;
 import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Evento;
-import com.example.ispw2.view.gui.other.Configurations;
-import javafx.event.ActionEvent;
+import com.example.ispw2.altro.configurations.Configurations;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class HomeClienteGUI {
@@ -74,7 +69,7 @@ public class HomeClienteGUI {
     }
 
     @FXML
-    public void cercaBtnClick() {
+    public void cerca() {
 
         String tipoSelezionato = eventifltBtn.getText();
         String localitaSelezionata = localitaFltBtn.getText();

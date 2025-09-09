@@ -1,9 +1,8 @@
 package com.example.ispw2.view.gui.controller;
 
-import com.example.ispw2.model.Cliente;
 import com.example.ispw2.model.Organizzatore;
 import com.example.ispw2.model.User;
-import com.example.ispw2.view.gui.other.Configurations;
+import com.example.ispw2.altro.configurations.Configurations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

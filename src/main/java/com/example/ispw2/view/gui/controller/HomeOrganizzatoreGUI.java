@@ -1,13 +1,9 @@
 package com.example.ispw2.view.gui.controller;
 
-import com.example.ispw2.DAO.DemoUserDAO;
-import com.example.ispw2.bean.FiltriBean;
-import com.example.ispw2.controller.HomeClienteController;
 import com.example.ispw2.controller.HomeOrganizzatoreController;
 import com.example.ispw2.model.Evento;
 import com.example.ispw2.model.Organizzatore;
-import com.example.ispw2.view.gui.other.Configurations;
-import com.example.ispw2.view.gui.other.EventoCell;
+import com.example.ispw2.altro.configurations.Configurations;
 import com.example.ispw2.view.gui.other.EventoCellOrganizzatore;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,7 +38,7 @@ public class HomeOrganizzatoreGUI {
 
 
     public void initialize(){
-        ArrayList<Evento> lista = HomeOrganizzatoreController.getInstance().getEventi();
+        ArrayList<Evento> lista = HomeOrganizzatoreController.getInstance().getMieiEventi();
         // Popolo la ListView
         listaEventi.getItems().addAll(lista);
 

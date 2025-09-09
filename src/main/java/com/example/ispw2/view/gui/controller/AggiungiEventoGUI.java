@@ -1,18 +1,11 @@
 package com.example.ispw2.view.gui.controller;
 
-import com.example.ispw2.altro.Printer;
-import com.example.ispw2.bean.EventBean;
-import com.example.ispw2.bean.RegisterBean;
+import com.example.ispw2.engineering.bean.EventBean;
 import com.example.ispw2.controller.AddEventoController;
-import com.example.ispw2.controller.HomeOrganizzatoreController;
 import com.example.ispw2.controller.LoginController;
-import com.example.ispw2.controller.RegisterController;
-import com.example.ispw2.exceptions.DAOException;
-import com.example.ispw2.exceptions.EmailGiaInUsoException;
-import com.example.ispw2.exceptions.InvalidEmailException;
 import com.example.ispw2.model.Organizzatore;
 import com.example.ispw2.model.User;
-import com.example.ispw2.view.gui.other.Configurations;
+import com.example.ispw2.altro.configurations.Configurations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;

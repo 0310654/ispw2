@@ -100,7 +100,7 @@
                   </LinearGradient>
                </textFill>
             </MenuButton>
-            <Button fx:id="cercaBtn" layoutX="99.0" layoutY="337.0" mnemonicParsing="false" onAction="#cercaBtnClick" prefHeight="31.0" prefWidth="198.0" style="-fx-background-color: #3F3F37; -fx-background-radius: 5;" text="Cerca" textFill="#d6d6b1" />
+            <Button fx:id="cercaBtn" layoutX="99.0" layoutY="337.0" mnemonicParsing="false" onAction="#cerca" prefHeight="31.0" prefWidth="198.0" style="-fx-background-color: #3F3F37; -fx-background-radius: 5;" text="Cerca" textFill="#d6d6b1" />
             <Pane layoutX="14.0" layoutY="14.0" prefHeight="41.0" prefWidth="351.0" style="-fx-background-color: #3F3F37; -fx-background-radius: 6;">
                <children>
                   <Text fill="#d6d6b1" layoutX="100.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cerca il tuo evento" wrappingWidth="151.876953125">

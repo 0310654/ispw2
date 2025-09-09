@@ -27,8 +27,6 @@ public class HomeOrganizzatoreState extends State {
         int choice;
 
         while(true) {
-            Printer.print("Enter your choice: ");
-
             try{
                 choice = scan.nextInt();
                 scan.nextLine();
@@ -55,5 +53,10 @@ public class HomeOrganizzatoreState extends State {
         Printer.println("1) mostra i miei eventi");
         Printer.println("2) aggiungi un evento");
         Printer.println("3) logout");
+    }
+
+    @Override
+    public void showHeadline() {
+        Printer.printlnBlu("--------------HOME ORGANIZZATORE--------------");
     }
 }

@@ -1,19 +1,15 @@
 package testing;
 
-import com.example.ispw2.DAO.DemoPrenotazioneDAO;
-import com.example.ispw2.DAO.factory.DAOFactory;
-import com.example.ispw2.bean.LoginBean;
-import com.example.ispw2.bean.PrenotazioniBean;
-import com.example.ispw2.controller.HomeClienteController;
+import com.example.ispw2.engineering.factory.DAOFactory;
+import com.example.ispw2.engineering.bean.LoginBean;
+import com.example.ispw2.engineering.bean.PrenotazioniBean;
 import com.example.ispw2.controller.LoginController;
 import com.example.ispw2.controller.PrenotazioniController;
-import com.example.ispw2.exceptions.CredenzialiErrateException;
-import com.example.ispw2.exceptions.DAOException;
-import com.example.ispw2.exceptions.MaxPendingBorrowsException;
-import com.example.ispw2.exceptions.UserNonSupportatoException;
-import com.example.ispw2.model.Evento;
+import com.example.ispw2.engineering.exceptions.CredenzialiErrateException;
+import com.example.ispw2.engineering.exceptions.DAOException;
+import com.example.ispw2.engineering.exceptions.MaxPendingResException;
 import com.example.ispw2.model.Prenotazione;
-import com.example.ispw2.view.gui.other.Connector;
+import com.example.ispw2.altro.Connector;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -71,7 +67,8 @@ public class PrenotaTicketTest {
                 "Bianchi",
                 LocalDateTime.of(2025, 9, 5, 18, 00,00),
                 LocalDateTime.now(),
-                "PENDENTE");
+                "PENDENTE",
+                "VIP");
 
 
         List<Prenotazione> prenotazioniTot = PrenotazioniController.getInstance().getPrenotazioni();
@@ -88,7 +85,7 @@ public class PrenotaTicketTest {
                 System.out.println("\t" + prenotazione.getCod_prenotazione());
             }
 
-        } catch (MaxPendingBorrowsException e) {
+        } catch (MaxPendingResException e) {
             throw new RuntimeException(e);
         }
 
