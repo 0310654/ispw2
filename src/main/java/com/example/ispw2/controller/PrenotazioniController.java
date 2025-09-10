@@ -69,7 +69,6 @@ public class PrenotazioniController {
         if(cliente == null) {
             this.cliente = (Cliente) LoginController.getInstance().getUser();
         }
-        System.out.println("sono dentro prenotaeventocontroller"+ cliente.toString());
 
         //controllo che il costumer possa effettuare la prenotazione
         if(cliente.getPrenotazioni_pendenti() == null) {
@@ -92,6 +91,7 @@ public class PrenotazioniController {
             System.out.println("ho aggiunto l'evento..."+ cliente.toString());
 
         }else{
+            System.out.println("evento già presente:\n"+ cliente.getPrenotazioni_pendenti().toString()+"\n");
             throw new MaxPendingResException();
         }
     }

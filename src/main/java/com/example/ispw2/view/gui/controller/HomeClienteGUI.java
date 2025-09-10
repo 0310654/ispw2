@@ -86,7 +86,7 @@ public class HomeClienteGUI {
             System.out.println(evento.getNome());
             System.out.println(evento.toString());
         }
-        if(results.isEmpty()){
+        if(results.isEmpty() ){
             try {
                 FXMLLoader loader = new FXMLLoader(HomeClienteGUI.class.getResource("/com/example/ispw2/NessunRisultatoTrovato-view.fxml"));
                 loader.setControllerFactory(c -> new NoResultsViewGUI());

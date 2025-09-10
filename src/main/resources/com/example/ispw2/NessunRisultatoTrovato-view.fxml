@@ -22,7 +22,7 @@
                   <Image url="@../../../images/icona_login.png" />
                </image>
             </ImageView>
-            <Pane layoutX="120.0" layoutY="86.0" prefHeight="98.0" prefWidth="343.0" style="-fx-background-color: #3F3F37; -fx-background-radius: 6;">
+            <Pane layoutX="134.0" layoutY="156.0" prefHeight="98.0" prefWidth="343.0" style="-fx-background-color: #3F3F37; -fx-background-radius: 6;">
                <children>
                   <Text fill="#d6d6b1" layoutX="41.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ops... non abbiamo trovato nulla che corrispondesse alla tua ricerca" wrappingWidth="261.876953125">
                      <font>
@@ -31,17 +31,10 @@
                   </Text>
                </children>
             </Pane>
-            <Button layoutX="28.0" layoutY="22.0" mnemonicParsing="false" onAction="#backButton" prefHeight="41.0" prefWidth="44.0" style="-fx-background-radius: 15;" textFill="#3f3f37" />
-            <ImageView fx:id="backBtn" fitHeight="32.0" fitWidth="34.0" layoutX="34.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/backbutton.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="tornaAllaHomeBTN" layoutX="233.0" layoutY="243.0" mnemonicParsing="false" onAction="#tornaAllaHome" prefHeight="70.0" prefWidth="144.0" style="-fx-background-color: #3F3F37; -fx-background-radius: 15;" text="Torna alla home" textFill="#d6d6b1">
+            <Button fx:id="tornaAllaHomeBTN" layoutX="28.0" layoutY="22.0" mnemonicParsing="false" onAction="#tornaAllaHome" prefHeight="41.0" prefWidth="44.0" style="-fx-background-radius: 15;" text="←" textFill="#3f3f37">
                <font>
-                  <Font name="System Bold Italic" size="17.0" />
-               </font>
-            </Button>
+                  <Font size="19.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </children>

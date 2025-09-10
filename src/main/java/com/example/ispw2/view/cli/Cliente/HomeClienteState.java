@@ -6,8 +6,6 @@ import com.example.ispw2.view.cli.Implementations;
 import com.example.ispw2.view.cli.State;
 import com.example.ispw2.view.cli.StateMachine;
 
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class HomeClienteState extends State {
@@ -50,7 +48,7 @@ public class HomeClienteState extends State {
             if (choice == 1) {
                 Printer.println("Non ancora implementato.");
             } else if (choice == 2) {
-                stateMachine.goNext(new SearchEventState(cliente));
+                stateMachine.goNext(new SearchAndBookEventState(cliente));
                 return; // esci dal loop
             } else if (choice == 3) {
                 new Implementations().start();

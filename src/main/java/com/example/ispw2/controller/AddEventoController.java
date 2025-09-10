@@ -63,9 +63,11 @@ public class AddEventoController {
         EventiDAO eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
         try {
             eventiDAO.addEvento(evento);
+            System.out.println("Evento salvato:\n"+ evento.toString()+"\n");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
 
         ((Organizzatore)LoginController.getInstance().getUser()).addiMieiEventi(evento);
     }

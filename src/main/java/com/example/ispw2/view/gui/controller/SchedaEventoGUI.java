@@ -133,14 +133,22 @@ public class SchedaEventoGUI {
     @FXML
     private void back() {
         try {
-            FXMLLoader loader = new FXMLLoader(SchedaEventoGUI.class.getResource("/com/example/ispw2/ricerca-view.fxml"));
-            loader.setControllerFactory(c -> new HomeClienteGUI(user));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ispw2/ricerca-view.fxml"));
+
+            // Passiamo l'utente loggato al controller della Home
+            loader.setControllerFactory(c -> new RisultatiDiRicercaGUI());
+
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
+
+            // Recupera lo stage attuale e cambia scena
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(scene);
+            stage.show();
+
         } catch (IOException e) {
-            logger.severe("Error in SchedaEventoGUI " + e.getMessage());
+            System.out.println("Errore durante il caricamento della schermata dei risultati di ricerca");
+            e.printStackTrace();
         }
     }
 }

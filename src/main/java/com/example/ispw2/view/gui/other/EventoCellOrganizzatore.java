@@ -33,16 +33,6 @@ public class EventoCellOrganizzatore extends ListCell<Evento> {
         container.setSpacing(15);  // Spaziatura fra label e bottone
         container.getChildren().addAll(nomeEvento, dettagliButton);
 
-        /*
-         Non implementato da qui in poi
-         */
-
-        /* dettagliButton.setOnAction(event -> {
-            Evento selectedEvento = getItem();
-            if (selectedEvento != null) {
-                apriSchedaEvento(selectedEvento);
-            }
-        });*/
     }
 
     @Override

@@ -18,6 +18,7 @@ public class NoResultsViewGUI {
     public ImageView backBtn;
     @FXML
     public Button tornaAllaHomeBTN;
+    public Button backButton;
 
     protected User user;
 
@@ -48,4 +49,5 @@ public class NoResultsViewGUI {
             e.printStackTrace();
         }
     }
+
 }

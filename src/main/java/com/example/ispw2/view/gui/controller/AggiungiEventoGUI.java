@@ -113,12 +113,12 @@ public class AggiungiEventoGUI {
         ArrayList<Integer>  disponibilita_settore = new ArrayList<>();
 
         //prendo il mio nome
-        organizzatore = LoginController.getInstance().getUser().getName();
+        organizzatore = LoginController.getInstance().getUser().getEmail();
 
         //funzione che crea un codice casuale per il mio evento
         codice = AddEventoController.getInstance().newCodiceEvento();
 
-        if(!this.nomeField.getText().isEmpty() && this.enteFiled.getText().isEmpty() && this.tipoField.getText().isEmpty() && this.localitaField.getText().isEmpty() && this.dataField.getValue() != null && this.descrizioneField.getText().isEmpty()){
+        if(!this.nomeField.getText().isEmpty() && !this.enteFiled.getText().isEmpty() && !this.tipoField.getText().isEmpty() && !this.localitaField.getText().isEmpty() && this.dataField.getValue() != null && !this.descrizioneField.getText().isEmpty()){
 
             nome = this.nomeField.getText();
             ente = this.enteFiled.getText();
@@ -180,7 +180,7 @@ public class AggiungiEventoGUI {
             loader.setControllerFactory(c -> new EventoSalvatoGUI());
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
-            Stage stage = (Stage) errorLabel.getScene().getWindow();
+            Stage stage = (Stage) aggiungiEventoButton.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
             logger.severe("Error in AggiungiEventoGUI " + e.getMessage());

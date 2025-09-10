@@ -35,12 +35,10 @@
                   </Text>
                </children>
             </Pane>
-            <Button fx:id="backButton" layoutX="28.0" layoutY="22.0" mnemonicParsing="false" onAction="#back" prefHeight="41.0" prefWidth="44.0" style="-fx-background-radius: 15;" textFill="#3f3f37" />
-            <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="34.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/backbutton.png" />
-               </image>
-            </ImageView>
+            <Button fx:id="backButton" layoutX="28.0" layoutY="22.0" mnemonicParsing="false" onAction="#back" prefHeight="41.0" prefWidth="44.0" style="-fx-background-radius: 15;" text="←" textFill="#3f3f37">
+               <font>
+                  <Font size="19.0" />
+               </font></Button>
             <Pane layoutX="28.0" layoutY="76.0" opacity="0.8" prefHeight="305.0" prefWidth="197.0" style="-fx-background-color: #3F3F37;">
                <children>
                   <Label fx:id="nomeEventoLabel" layoutX="19.0" layoutY="14.0" style="-fx-background-color: #D6D6B1; -fx-background-radius: 5;" text="Nome evento..." />

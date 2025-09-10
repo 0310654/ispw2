@@ -18,11 +18,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.Logger;
 
-public class SearchEventState extends State {
+public class SearchAndBookEventState extends State {
     private static final Logger log = Logger.getLogger(Configurations.LOGGER_NAME);
 
     private Cliente cliente;
-    public SearchEventState(Cliente cliente) {
+    public SearchAndBookEventState(Cliente cliente) {
         super();
         this.cliente = cliente;
     }

@@ -29,6 +29,7 @@ public class HomeOrganizzatoreController {
 
         iMieiEventi = new ArrayList<>();
         for(Evento evento : eventi) {
+            System.out.println(evento.toString());
             if(evento.getOrganizzatore().equals(emailOrganizzatore)) {
                 iMieiEventi.add(evento);
             }

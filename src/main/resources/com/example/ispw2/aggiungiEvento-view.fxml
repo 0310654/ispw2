@@ -58,19 +58,17 @@
                         <!-- Pulsante per aggiungere un settore -->
                         <Button fx:id="addSettoreButton" onAction="#handleAddSettore" prefWidth="250" style="-fx-background-color: #3F3F37; -fx-text-fill: #d6d6b1; -fx-background-radius: 5;" text="Aggiungi settore" />
 
-                        <!-- Etichetta errore -->
-                        <Label fx:id="errorLabel" alignment="CENTER" textFill="red" wrapText="true" />
-
                         <!-- Pulsante finale -->
                         <Button fx:id="aggiungiEventoButton" onAction="#aggiungiEvento" prefWidth="250" style="-fx-background-color: #3F3F37; -fx-text-fill: #d6d6b1; -fx-background-radius: 5;" text="Aggiungi Evento" />
+
+                        <!-- Etichetta errore -->
+                        <Label fx:id="errorLabel" alignment="CENTER" textFill="red" wrapText="true" />
                      </children>
                   </VBox>
-                  <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#back" prefHeight="34.0" prefWidth="36.0" style="-fx-background-radius: 15;" textFill="#3f3f37" />
-                  <ImageView fx:id="backBtn" fitHeight="26.0" fitWidth="26.0" layoutX="19.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/backbutton.png" />
-                     </image>
-                  </ImageView>
+                  <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#back" prefHeight="34.0" prefWidth="36.0" style="-fx-background-radius: 15;" text="←" textFill="#3f3f37">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
                </children>
             </Pane>
          </children>

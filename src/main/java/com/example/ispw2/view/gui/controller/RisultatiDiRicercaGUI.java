@@ -40,16 +40,22 @@ public class RisultatiDiRicercaGUI {
     public void backButton(ActionEvent actionEvent) {
         try {
             // Carica la HomeCliente
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ispw2/ricerca-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ispw2/homecliente-view.fxml"));
+
+            // Passiamo l'utente loggato al controller della Home
             loader.setControllerFactory(c -> new HomeClienteGUI((Cliente) user));
+
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
+
+            // Recupera lo stage attuale e cambia scena
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
 
         } catch (IOException e) {
-            logger.severe("Error in RisultatiDiRicercaGUI " + e.getMessage());
+            System.out.println("Errore durante il caricamento della Home");
+            e.printStackTrace();
         }
     }
 
