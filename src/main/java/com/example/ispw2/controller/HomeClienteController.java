@@ -63,59 +63,67 @@ public class HomeClienteController {
      * @return Lista di eventi filtrati in base ai filtri selezionati (secondo SelectedBean)
      */
     public ArrayList<Evento> filtriSelezionati(SelectedBean selectedBean) {
-        //selectedbean ha una data precisa, io confronto solo il mese e l'anno
-
-        //prendo la lista di tutti gli eventi dal DAO
         if(eventi == null) {
             EventiDAO eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
             eventi = eventiDAO.getEventi();
         }
-        //creo una lista vuota da riempire
+
         eventi_filtrati = new ArrayList<>();
+        double[] rangePrezzo = parsePrezzo(selectedBean.getPrezzo());
+        YearMonth selectedYearMonth = selectedBean.getData() != null ? YearMonth.from(selectedBean.getData()) : null;
+
+        for (Evento evento : eventi) {
+            if (matchTipo(evento, selectedBean) &&
+                    matchLocalita(evento, selectedBean) &&
+                    matchData(evento, selectedYearMonth) &&
+                    matchPrezzo(evento, rangePrezzo)) {
+
+                eventi_filtrati.add(evento);
+            }
+        }
+
+        return eventi_filtrati;
+    }
+
+    private double[] parsePrezzo(String prezzoSelezionato) {
         double prezzoMin = 0;
         double prezzoMax = Double.MAX_VALUE;
-        String prezzoSelezionato = selectedBean.getPrezzo();
+
         if (prezzoSelezionato != null && prezzoSelezionato.matches("\\d+(?:\\.\\d+)?€-\\d+(?:\\.\\d+)?€")) {
             Pattern pattern = Pattern.compile("(\\d+(?:\\.\\d+)?)€-(\\d+(?:\\.\\d+)?)€");
             Matcher matcher = pattern.matcher(prezzoSelezionato);
-
             if (matcher.find()) {
                 prezzoMin = Double.parseDouble(matcher.group(1));
                 prezzoMax = Double.parseDouble(matcher.group(2));
             }
         }
 
-        YearMonth yearMonth = null;
-        LocalDateTime confrontData = selectedBean.getData();
-        if (confrontData != null) {
-            yearMonth = YearMonth.from(confrontData);
-        }
-        for (Evento evento : eventi) {
-            boolean tipoOk = selectedBean.getTipoEvento().equals("Eventi") || selectedBean.getTipoEvento().equals(evento.getTipo_evento());
-            boolean localitaOk = selectedBean.getLocalita().equals("Località") || selectedBean.getLocalita().equals(evento.getLocalita());
-            LocalDateTime dataEvento = evento.getData_evento();
-            YearMonth eventoYM = YearMonth.from(dataEvento);
-            boolean dataOk = confrontData == null || yearMonth.equals(eventoYM);
-
-            if (!tipoOk || !localitaOk || !dataOk) {
-                continue; // Salta questo evento se non rispetta i filtri base
-            }
-            // Controlliamo se almeno un settore rientra nel range di prezzo
-            boolean settoreValido = false;
-            for (Double prezzoSettore : evento.getPrezzo_settore()) {
-                if(prezzoMin==0){
-                    //non sono stati selezionati filtri di prezzo
-                    settoreValido = true;
-                }
-                else if (prezzoSettore >= prezzoMin && prezzoSettore <= prezzoMax) {
-                    settoreValido = true;
-                }
-            }
-            if (settoreValido) {
-                eventi_filtrati.add(evento);
-            }
-        }
-        return eventi_filtrati;
+        return new double[]{prezzoMin, prezzoMax};
     }
+
+    private boolean matchTipo(Evento evento, SelectedBean selectedBean) {
+        return selectedBean.getTipoEvento().equals("Eventi") || selectedBean.getTipoEvento().equals(evento.getTipo_evento());
+    }
+
+    private boolean matchLocalita(Evento evento, SelectedBean selectedBean) {
+        return selectedBean.getLocalita().equals("Località") || selectedBean.getLocalita().equals(evento.getLocalita());
+    }
+
+    private boolean matchData(Evento evento, YearMonth selectedYearMonth) {
+        return selectedYearMonth == null || YearMonth.from(evento.getData_evento()).equals(selectedYearMonth);
+    }
+
+    private boolean matchPrezzo(Evento evento, double[] rangePrezzo) {
+        double prezzoMin = rangePrezzo[0];
+        double prezzoMax = rangePrezzo[1];
+
+        for (Double prezzoSettore : evento.getPrezzo_settore()) {
+            if (prezzoMin == 0 || (prezzoSettore >= prezzoMin && prezzoSettore <= prezzoMax)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
