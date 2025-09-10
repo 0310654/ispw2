@@ -16,26 +16,35 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Properties;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 //FUNZIONA
 
 public class RicercaTest {
 
 
-    private void getFiltritest() {
+    private FiltriBean getFiltritest() {
         FiltriBean filtriBean = HomeClienteController.getInstance().getFiltri();
         System.out.println(filtriBean.toString());
+        return filtriBean;
     }
     @Test
     public void testFiltriMYSQL(){
         changeType("MYSQL");
         DAOFactory.refreshDAOFactory(true);
-        getFiltritest();
+        FiltriBean f = getFiltritest();
+        assertTrue(!f.getEventi().isEmpty());
+        assertTrue(!f.getLocalita().isEmpty());
+        assertTrue(!f.getPrezzo().isEmpty());
     }
     @Test
     public void testFiltriDEMO(){
         changeType("demo");
         DAOFactory.refreshDAOFactory(true);
-        getFiltritest();
+        FiltriBean f = getFiltritest();
+        assertTrue(!f.getEventi().isEmpty());
+        assertTrue(!f.getLocalita().isEmpty());
+        assertTrue(!f.getPrezzo().isEmpty());
     }
 
 
@@ -43,18 +52,18 @@ public class RicercaTest {
     public void testRicercaMYSQL(){
         changeType("MYSQL");
         DAOFactory.refreshDAOFactory(true);
-        ricercatest();
+        assertTrue(ricercatest());
     }
 
     @Test
     public void testRicercaDEMO(){
         changeType("demo");
         DAOFactory.refreshDAOFactory(true);
-        ricercatest();
+        assertTrue(ricercatest());
     }
 
 
-    private void ricercatest() {
+    private Boolean ricercatest() {
         LocalDate data = LocalDate.of(2025, 9, 12);
         LocalTime ora = LocalTime.of(10, 30);
         LocalDateTime dt = LocalDateTime.of(data, ora);
@@ -71,6 +80,7 @@ public class RicercaTest {
         for (Evento e : eventi) {
             System.out.println(e.toString());
         }
+        return true;
     }
 
     private void changeType(String persistence){

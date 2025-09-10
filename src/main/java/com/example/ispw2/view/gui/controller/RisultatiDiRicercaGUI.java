@@ -37,7 +37,7 @@ public class RisultatiDiRicercaGUI {
 
 
     @FXML
-    public void backButton(ActionEvent actionEvent) {
+    public void backButtonMethod(ActionEvent actionEvent) {
         try {
             // Carica la HomeCliente
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ispw2/homecliente-view.fxml"));

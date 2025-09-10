@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RegTest {
 
-    private void testReg() {
+    private Boolean testReg() {
         RegisterBean registerBean = new RegisterBean(
                 "nome",
                 "cognome",
@@ -40,6 +40,7 @@ public class RegTest {
         } catch (DAOException e) {
             throw new RuntimeException(e);
         }
+        return true;
     }
 
     private void changeType(String persistence){
@@ -63,21 +64,24 @@ public class RegTest {
     public void testRegistrazioneMYSQL(){
         changeType("MYSQL");
         DAOFactory.refreshDAOFactory(true);
+        Boolean esito = testReg();
         eliminaUtenteMYSQL();
-        testReg();
+        assertTrue(esito);
+
     }
     @Test
     public void testRegistrazioneDEMO(){
         changeType("demo");
         DAOFactory.refreshDAOFactory(true);
-        testReg();
+        assertTrue(testReg());
     }
     @Test
     public void testRegistrazioneJSON(){
         changeType("JSON");
         DAOFactory.refreshDAOFactory(true);
-        testReg();
+        Boolean esito =testReg();
         eliminaUtenteJSON();
+        assertTrue(esito);
     }
 
     private void eliminaUtenteJSON() {
@@ -115,6 +119,7 @@ public class RegTest {
         try {
             ps = conn.prepareStatement(sql_s);
             int rowsDeleted = ps.executeUpdate();
+            conn.commit();
             System.out.println("righe cancellate: "+ rowsDeleted);
         } catch (SQLException e) {
             throw new RuntimeException(e);

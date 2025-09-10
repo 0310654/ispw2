@@ -14,11 +14,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 //FUNZIONA
 
 public class LoginTest {
 
-    private void testClienteLogin() {
+    private Boolean testClienteLogin() {
         LoginBean loginBean = new LoginBean(
                 "cliente@email.com",
                 "password",
@@ -30,7 +32,7 @@ public class LoginTest {
         } catch (CredenzialiErrateException | DAOException e) {
             throw new RuntimeException(e);
         }
-
+        return true;
     }
 
 
@@ -38,24 +40,24 @@ public class LoginTest {
     public void testLoginClienteMYSQL(){
         changeType("MYSQL");
         DAOFactory.refreshDAOFactory(true);
-        testClienteLogin();
+        assertTrue(testClienteLogin());
     }
     @Test
     public void testLoginClienteDEMO(){
         changeType("demo");
         DAOFactory.refreshDAOFactory(true);
-        testClienteLogin();
+        assertTrue(testClienteLogin());
     }
     @Test
     public void testLoginClienteJSON(){
         changeType("JSON");
         DAOFactory.refreshDAOFactory(true);
-        testClienteLogin();
+        assertTrue(testClienteLogin());
     }
 
 
 
-    private void testOrganizzatoreLogin() {
+    private Boolean testOrganizzatoreLogin() {
         LoginBean loginBean = new LoginBean(
                 "organizzatore@email.com",
                 "password",
@@ -67,25 +69,26 @@ public class LoginTest {
         } catch (CredenzialiErrateException | DAOException e) {
             throw new RuntimeException(e);
         }
+        return true;
     }
 
     @Test
     public void testLoginOrganizzatoreJSON(){
         changeType("JSON");
         DAOFactory.refreshDAOFactory(true);
-        testOrganizzatoreLogin();
+        assertTrue(testOrganizzatoreLogin());
     }
     @Test
     public void testLoginOrganizzatoreMYSQL(){
         changeType("MYSQL");
         DAOFactory.refreshDAOFactory(true);
-        testOrganizzatoreLogin();
+        assertTrue(testOrganizzatoreLogin());
     }
     @Test
     public void testLoginOrganizzatoreDEMO(){
         changeType("demo");
         DAOFactory.refreshDAOFactory(true);
-        testOrganizzatoreLogin();
+        assertTrue(testOrganizzatoreLogin());
     }
 
     private void changeType(String persistence){

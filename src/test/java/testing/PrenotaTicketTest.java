@@ -23,11 +23,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Properties;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class PrenotaTicketTest {
     @Test
     public void newCodiceTest(){
         String nuovocodice = PrenotazioniController.getInstance().newCodice();
-        System.out.println(nuovocodice);
+        assertTrue(!nuovocodice.isEmpty());
     }
 
 
@@ -35,17 +37,18 @@ public class PrenotaTicketTest {
     public void prenotatestMYSQL() {
         changeType("MYSQL");
         DAOFactory.refreshDAOFactory(true);
-        prenotatest();
+        Boolean esito = prenotatest();
         eliminaPrenotazioneMYSQL();
+        assertTrue(esito);
     }
     @Test
     public void prenotatestDEMO(){
         changeType("demo");
         DAOFactory.refreshDAOFactory(true);
-        prenotatest();
+        assertTrue(prenotatest());
     }
 
-    private void prenotatest() {
+    private Boolean prenotatest() {
         LoginController.getInstance().setUser(null);
         PrenotazioniController.getInstance().setCliente(null);
         LoginBean loginBean = new LoginBean(
@@ -88,6 +91,7 @@ public class PrenotaTicketTest {
         } catch (MaxPendingResException e) {
             throw new RuntimeException(e);
         }
+        return true;
 
     }
 

@@ -17,9 +17,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class IMieiEventiTest {
 
-    private void iMieiEventitest() {
+    private Boolean iMieiEventitest() {
 
         LoginBean loginBean = new LoginBean(
                 "organizzatore@email.com",
@@ -46,20 +48,22 @@ public class IMieiEventiTest {
             throw new RuntimeException(e);
         }
 
+        return true;
+
     }
 
     @Test
     public void iMieiEventitestDEMO() {
         changeType("demo");
         DAOFactory.refreshDAOFactory(true);
-        iMieiEventitest();
+        assertTrue(iMieiEventitest());
     }
 
     @Test
     public void iMieiEventitestMYSQL() {
         changeType("MYSQL");
         DAOFactory.refreshDAOFactory(true);
-        iMieiEventitest();
+        assertTrue(iMieiEventitest());
     }
 
     private void changeType(String persistence){

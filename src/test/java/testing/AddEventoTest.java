@@ -1,4 +1,5 @@
 package testing;
+import com.example.ispw2.engineering.DAO.EventiDAO;
 import com.example.ispw2.engineering.factory.DAOFactory;
 import com.example.ispw2.engineering.bean.EventBean;
 import com.example.ispw2.engineering.bean.LoginBean;
@@ -7,6 +8,7 @@ import com.example.ispw2.controller.LoginController;
 import com.example.ispw2.engineering.exceptions.CredenzialiErrateException;
 import com.example.ispw2.engineering.exceptions.DAOException;
 import com.example.ispw2.altro.Connector;
+import com.example.ispw2.model.Evento;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -22,6 +24,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddEventoTest {
 
@@ -69,23 +73,48 @@ public class AddEventoTest {
                 numposti,
                 " ");
         AddEventoController.getInstance().addEvento(eventBean);
+
+
+
     }
 
     @Test
     public void testAddEventoMYSQL(){
         changeType("MYSQL");
         DAOFactory.refreshDAOFactory(true);
+
+        EventiDAO eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
+        ArrayList<Evento> eventi = eventiDAO.getEventi();
+        Integer numEventiOld = eventi.size();
+
         addEventoTest();
         newCodiceEventoTest();
+
+        eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
+        eventi = eventiDAO.getEventi();
+        Integer numEventiNew = eventi.size();
+
         cancellaEventoMYSQL();
         cancellaSettoriMYSQL();
+
+        assertEquals(numEventiOld, numEventiNew-1);
     }
     @Test
     public void testAddEventoDEMO(){
         changeType("demo");
         DAOFactory.refreshDAOFactory(true);
+
+        EventiDAO eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
+        ArrayList<Evento> eventi = eventiDAO.getEventi();
+        Integer numEventiOld = eventi.size();
+
         addEventoTest();
         newCodiceEventoTest();
+
+        eventiDAO = DAOFactory.getDAOFactory().getEventiDAO();
+        eventi = eventiDAO.getEventi();
+        Integer numEventiNew = eventi.size();
+        assertEquals(numEventiOld, numEventiNew-1);
     }
 
     private void changeType(String persistence){
@@ -113,7 +142,8 @@ public class AddEventoTest {
         try {
             ps = conn.prepareStatement(sql_s);
             int rowsDeleted = ps.executeUpdate();
-            System.out.println("righe cancellate: "+ rowsDeleted);
+            conn.commit();
+            System.out.println("righe cancellate settore: "+ rowsDeleted);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -127,7 +157,8 @@ public class AddEventoTest {
         try {
             ps = conn.prepareStatement(sql);
             int rowsDeleted = ps.executeUpdate();
-            System.out.println("righe cancellate: "+ rowsDeleted);
+            conn.commit();
+            System.out.println("righe cancellate evento: "+ rowsDeleted);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
